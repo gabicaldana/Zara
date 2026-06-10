@@ -1,0 +1,56 @@
+/* Centralizar a tela conforme layout do Figma */
+html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+body { display: flex; align-items: center; justify-content: center; background: #FFFFFF; }
+.stage { display: flex; align-items: center; justify-content: center; }
+
+/* Root frame */
+.frame[data-name="Tela Inicial - iPhone 17"] { width: 402px; background: #F9F9F9; box-sizing: border-box; }
+
+.frame { box-sizing: border-box; }
+.frame img { width: 100%; height: auto; display: block; }
+.text { color: #000; font-family: inherit; margin: 0; }
+
+/* Main layout per Figma */
+.frame[data-name="Main"] { padding: 64px 0 176px; display: block; width: 100%; }
+
+/* Hero */
+[data-name="Hero Section"] { height: 618px; position: relative; }
+.frame[data-name^="AB6AXuA3o"] img,
+.frame[data-name^="AB6AXuA3o"] { width: 100%; height: 100%; object-fit: cover; display: block; }
+.text[data-name="Essencial"] { font-family: 'Libre Caslon Text', serif; font-weight: 400; font-size: 48px; line-height: 1em; letter-spacing: -2px; color: #FFFFFF; }
+.text[data-name="Coleção de Outono '24"] { font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 12px; line-height: 1.2em; letter-spacing: 1.2px; color: #FFFFFF; opacity: 0.9; }
+
+/* Featured product section */
+.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] { padding: 0 20px; display: block; }
+.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] .frame[data-name="Background"] img { width: 100%; height: 525px; object-fit: cover; display: block; }
+.text[data-name="EXEMPLO DE PRODUTO"] { font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; font-size: 16px; letter-spacing: -0.4px; text-transform: uppercase; color: #000; }
+.text[data-name="R$ 499,00"] { font-family: 'Hanken Grotesk', sans-serif; font-weight: 500; font-size: 18px; color: #5D5F5F; }
+.rectangle[data-name="Horizontal Divider (Inspired by wireframe line)"] { width: 96px; height: 1.5px; background: #000000; margin: 12px 0; }
+
+/* Asymmetric grid */
+.frame[data-name="Asymmetric Grid Section"] { width: 350px; padding: 0; }
+.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] img { width: 100%; height: 253.5px; object-fit: cover; }
+.text[data-name="Novidades"] { font-family: 'Libre Caslon Text', serif; font-size: 28px; color: #000; }
+.text[data-name="VESTIDO LINHO"] { font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 12px; color: #000; }
+.text[data-name="R$ 299,00"] { font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; color: #5D5F5F; }
+.frame[data-name^="Container"] .frame[data-name^="Background"] img[alt="bota background"] { height: 253.5px; }
+.text[data-name="BOTA COURO"] { font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 12px; color: #000; }
+.text[data-name="R$ 759,00"] { font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; color: #5D5F5F; }
+
+/* CTA */
+.frame[data-name="CTA Section → Button"] { width: 350px; display: flex; justify-content: center; align-items: center; padding: 15.5px 0 15.89px; background: #000000; }
+.frame[data-name="CTA Section → Button"] .text { color: #FFFFFF; font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1.2px; text-align: center; }
+
+/* Footer */
+.frame[data-name="Footer Component"] { padding: 48px 20px; background: #F3F3F3; border-top: 1px solid #CFC4C5; }
+.frame[data-name="Footer Component"] .text { color: #1A1C1C; }
+.text[data-name="MODA MINIMALISTA"] { font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; }
+.text[data-name="© 2024 MODA MINIMALISTA"] { opacity: 0.6; color: #1A1C1C; }
+
+/* Navigation links */
+.frame[data-name="Nav"] .text { color: #5D5F5F; font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; }
+
+/* Side drawer list */
+.frame[data-name="List"] .text { color: #000; font-family: 'Hanken Grotesk', sans-serif; }
+
+@media(max-width:420px){ .frame[data-name="Tela Inicial - iPhone 17"]{ width: 90vw; } }
