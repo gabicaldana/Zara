@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZARA · Busca</title>
+  <!-- Fonte Hanken Grotesk + Libre Caslon Text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & base herdado do style.css ===== */
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: #FFFFFF;
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+    .stage {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* ===== Estilos da tela Busca ===== */
+    .search-frame {
+      width: 402px;
+      background: #F9F9F9;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .search-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: #F9F9F9;
+      border-bottom: 1px solid #CFC4C5;
+      position: relative;
+      z-index: 2;
+    }
+    .search-header .header-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-header .header-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    .search-logo {
+      font-family: 'Libre Caslon Text', serif;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: -5%;
+      color: #000000;
+      margin: 0;
+      flex: 1;
+      text-align: center;
+    }
+
+    /* Main content */
+    .search-main {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding: 24px 20px 120px 20px;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    /* Search input */
+    .search-input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input-wrapper .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5D5F5F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .search-input-wrapper .search-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .search-input-wrapper input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      border: 1px solid #CFC4C5;
+      border-radius: 8px;
+      background: #FFFFFF;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 16px;
+      color: #1A1C1C;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+
+    .search-input-wrapper input:focus {
+      outline: none;
+      border-color: #000000;
+    }
+
+    .search-input-wrapper input::placeholder {
+      color: #B0B0B0;
+    }
+
+    /* "Você quis dizer" */
+    .search-suggestion {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #F3F3F3;
+      border-radius: 8px;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 14px;
+      color: #1A1C1C;
+    }
+
+    .search-suggestion .did-you-mean {
+      color: #5D5F5F;
+    }
+
+    .search-suggestion .correction {
+      font-weight: 600;
+      color: #000000;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .search-suggestion .correction:hover {
+      opacity: 0.7;
+    }
+
+    /* Suggestions title */
+    .search-suggestions-title {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 10%;
+      text-transform: uppercase;
+      color: #1A1C1C;
+      margin: 0;
+    }
+
+    /* Suggestions list */
+    .search-suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .search-suggestion-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #CFC4C5;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .search-suggestion-item:hover {
+      opacity: 0.7;
+    }
+
+    .search-suggestion-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-suggestion-item .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .search-suggestion-item .product-name {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: #1A1C1C;
+    }
+
+    .search-suggestion-item .product-price {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #5D5F5F;
+    }
+
+    .search-suggestion-item .product-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #E0E0E0;
+      flex-shrink: 0;
+    }
+
+    .search-suggestion-item .product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Footer */
+    .search-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 32px 20px;
+      width: 100%;
+      background: #F3F3F3;
+      border-top: 1px solid #CFC4C5;
+      box-sizing: border-box;
+      margin-top: auto;
+    }
+    .search-footer .footer-brand {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 1.2;
+      letter-spacing: 10%;
+      color: #1A1C1C;
+      margin: 0;
+    }
+    .search-footer .footer-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0 0 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .search-footer .footer-nav a {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #5D5F5F;
+      text-decoration: none;
+    }
+    .search-footer .footer-nav a:hover {
+      text-decoration: underline;
+    }
+    .search-footer .footer-copy {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.6;
+      color: #1A1C1C;
+      margin: 12px 0 0 0;
+    }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      height: 64px;
+      background: #F9F9F9;
+      border-top: 1px solid #CFC4C5;
+      box-sizing: border-box;
+    }
+    .bottom-nav .nav-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+    }
+    .bottom-nav .nav-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 420px) {
+      .search-frame {
+        width: 100%;
+        max-width: 402px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="search-frame">
+
+      <!-- HEADER -->
+      <div class="search-header">
+        <button class="header-icon" aria-label="Voltar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <span class="search-logo">ZARA</span>
+        <button class="header-icon" aria-label="Carrinho">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- MAIN -->
+      <div class="search-main">
+
+        <!-- Search input -->
+        <div class="search-input-wrapper">
+          <span class="search-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input type="text" placeholder="Buscar..." value="Calsa">
+        </div>
+
+        <!-- "Você quis dizer" -->
+        <div class="search-suggestion">
+          <span class="did-you-mean">Você quis dizer:</span>
+          <span class="correction">Calça?</span>
+        </div>
+
+        <!-- Suggestions -->
+        <p class="search-suggestions-title">SUGESTÕES</p>
+
+        <div class="search-suggestions">
+          <a href="#" class="search-suggestion-item">
+            <div class="product-info">
+              <span class="product-name">Calça Pantalona Alfaiataria</span>
+              <span class="product-price">R$ 299,00</span>
+            </div>
+            <div class="product-thumb">
+              <img src="assets/figma/Luxury fashion item.png" alt="Calça Pantalona">
+            </div>
+          </a>
+
+          <a href="#" class="search-suggestion-item">
+            <div class="product-info">
+              <span class="product-name">Calça Jeans Reta Premium</span>
+              <span class="product-price">R$ 199,00</span>
+            </div>
+            <div class="product-thumb">
+              <img src="assets/figma/Luxury apparel.png" alt="Calça Jeans">
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="search-footer">
+        <p class="footer-brand">MODA MINIMALISTA</p>
+        <div class="footer-nav">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+        <p class="footer-copy">© 2024 MODA MINIMALISTA</p>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <div class="bottom-nav">
+        <button class="nav-icon" aria-label="Início">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Busca">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Perfil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

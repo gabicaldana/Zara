@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zara - Carrinho</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="cart-stage">
+    <div class="cart-frame">
+      <header class="cart-topbar">
+        <button class="header-icon" aria-label="Voltar">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 4L6 8.5L11 13" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="cart-logo">ZARA</div>
+        <button class="header-icon" aria-label="Carrinho">
+          <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="4" width="11" height="14" stroke="#000" stroke-width="1.5"/>
+            <path d="M4 4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </header>
+
+      <main class="cart-main">
+        <section class="cart-headline">
+          <h1>Seu carrinho</h1>
+        </section>
+
+        <section class="cart-items-list">
+          <article class="cart-item">
+            <div class="cart-item-media">
+              <img src="assets/figma/cart-item-1.png" alt="Sobretudo de Lã" />
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-title">SOBRETUDO DE LÃ</div>
+              <div class="cart-item-price">R$ 899,00</div>
+              <div class="cart-item-selectors">
+                <div class="cart-selector color-swatch"></div>
+                <div class="cart-selector size-pill">P</div>
+              </div>
+              <div class="cart-quantity">
+                <button aria-label="Diminuir">-</button>
+                <span>1</span>
+                <button aria-label="Aumentar">+</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="cart-item">
+            <div class="cart-item-media">
+              <img src="assets/figma/cart-item-2.png" alt="Vestido de Seda" />
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-title">VESTIDO DE SEDA</div>
+              <div class="cart-item-price">R$ 549,00</div>
+              <div class="cart-item-selectors">
+                <div class="cart-selector color-swatch"></div>
+                <div class="cart-selector size-pill">M</div>
+              </div>
+              <div class="cart-quantity">
+                <button aria-label="Diminuir">-</button>
+                <span>1</span>
+                <button aria-label="Aumentar">+</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="recommendation-section">
+          <h2>Pode te interessar:</h2>
+          <div class="recommendation-list">
+            <article class="recommendation-card">
+              <div class="recommendation-background">
+                <img src="assets/figma/recommended-1.png" alt="Bolsa Minimalista" />
+              </div>
+              <div class="recommendation-content">
+                <div class="recommendation-name">BOLSA MINIMALISTA</div>
+                <div class="recommendation-price">R$ 1.200,00</div>
+              </div>
+            </article>
+            <article class="recommendation-card">
+              <div class="recommendation-background">
+                <img src="assets/figma/recommended-2.png" alt="Tênis Essencial" />
+              </div>
+              <div class="recommendation-content">
+                <div class="recommendation-name">TÊNIS ESSENCIAL</div>
+                <div class="recommendation-price">R$ 450,00</div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="cart-sticky-footer">
+        <button class="cart-action primary">Finalizar Pedido</button>
+        <button class="cart-action secondary">Continuar comprando</button>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZARA · Meus Pedidos</title>
+  <!-- Fonte Hanken Grotesk + Libre Caslon Text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & base herdado do style.css ===== */
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: #FFFFFF;
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+    .stage {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* ===== Estilos da tela Meus Pedidos ===== */
+    .orders-frame {
+      width: 402px;
+      background: #F9F9F9;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    /* Header */
+    .orders-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: #F9F9F9;
+      border-bottom: 1px solid #CFC4C5;
+      position: relative;
+      z-index: 2;
+    }
+    .orders-header .header-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .orders-header .header-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    .orders-logo {
+      font-family: 'Libre Caslon Text', serif;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: -5%;
+      color: #000000;
+      margin: 0;
+      flex: 1;
+      text-align: center;
+    }
+
+    /* Main content */
+    .orders-main {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding: 32px 20px 160px 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Page title */
+    .orders-title {
+      font-family: 'Libre Caslon Text', serif;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1.1;
+      letter-spacing: -2%;
+      color: #1A1C1C;
+      margin: 0;
+    }
+
+    /* Order list */
+    .orders-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+    }
+
+    /* Individual order card */
+    .order-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+      background: #F3F3F3;
+      border-radius: 16px;
+      box-sizing: border-box;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .order-number {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: #1A1C1C;
+      margin: 0;
+    }
+
+    .order-date {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #5D5F5F;
+      margin: 0;
+    }
+
+    /* Product thumbnail row */
+    .order-products {
+      display: flex;
+      gap: 8px;
+      padding: 4px 0;
+    }
+
+    .order-product-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #E0E0E0;
+      flex-shrink: 0;
+    }
+
+    .order-product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .order-product-thumb.more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #CFC4C5;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      color: #1A1C1C;
+    }
+
+    .order-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 8px;
+      border-top: 1px solid #CFC4C5;
+    }
+
+    .order-status-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .order-status {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 10%;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #FFFFFF;
+      display: inline-block;
+    }
+
+    .order-status.delivered {
+      color: #2E7D32;
+      background: #E8F5E9;
+    }
+
+    .order-status.transit {
+      color: #E65100;
+      background: #FFF3E0;
+    }
+
+    .order-status.processing {
+      color: #1565C0;
+      background: #E3F2FD;
+    }
+
+    .order-price {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #1A1C1C;
+      margin: 0;
+    }
+
+    .order-details-link {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 10%;
+      text-transform: uppercase;
+      color: #000000;
+      text-decoration: none;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 2px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .order-details-link:hover {
+      opacity: 0.7;
+    }
+
+    /* Footer */
+    .orders-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px 20px;
+      width: 100%;
+      background: #F3F3F3;
+      border-top: 1px solid #CFC4C5;
+      box-sizing: border-box;
+    }
+    .orders-footer .footer-brand {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 1.2;
+      letter-spacing: 10%;
+      color: #1A1C1C;
+      margin: 0;
+    }
+    .orders-footer .footer-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0 0 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .orders-footer .footer-nav a {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #5D5F5F;
+      text-decoration: none;
+    }
+    .orders-footer .footer-nav a:hover {
+      text-decoration: underline;
+    }
+    .orders-footer .footer-copy {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.6;
+      color: #1A1C1C;
+      margin: 16px 0 0 0;
+    }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      height: 64px;
+      background: #F9F9F9;
+      border-top: 1px solid #CFC4C5;
+      box-sizing: border-box;
+    }
+    .bottom-nav .nav-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+    }
+    .bottom-nav .nav-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 420px) {
+      .orders-frame {
+        width: 100%;
+        max-width: 402px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="orders-frame">
+
+      <!-- HEADER -->
+      <div class="orders-header">
+        <button class="header-icon" aria-label="Voltar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <span class="orders-logo">ZARA</span>
+        <button class="header-icon" aria-label="Carrinho">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- MAIN -->
+      <div class="orders-main">
+
+        <h1 class="orders-title">Meus Pedidos</h1>
+
+        <div class="orders-list">
+
+          <!-- Pedido #1 - ENTREGUE -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-number">PEDIDO #882910</span>
+              <span class="order-date">12 de Outubro, 2023</span>
+            </div>
+            <div class="order-products">
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury fashion item.png" alt="Produto 1">
+              </div>
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury accessory.png" alt="Produto 2">
+              </div>
+              <div class="order-product-thumb more">+2</div>
+            </div>
+            <div class="order-details">
+              <div class="order-status-group">
+                <span class="order-status delivered">ENTREGUE</span>
+                <span class="order-price">R$ 2.450,00</span>
+              </div>
+              <a href="#" class="order-details-link">VER DETALHES</a>
+            </div>
+          </div>
+
+          <!-- Pedido #2 - EM TRÂNSITO -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-number">PEDIDO #881452</span>
+              <span class="order-date">05 de Outubro, 2023</span>
+            </div>
+            <div class="order-products">
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury apparel.png" alt="Produto 1">
+              </div>
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury fashion item.png" alt="Produto 2">
+              </div>
+            </div>
+            <div class="order-details">
+              <div class="order-status-group">
+                <span class="order-status transit">EM TRÂNSITO</span>
+                <span class="order-price">R$ 1.890,00</span>
+              </div>
+              <a href="#" class="order-details-link">VER DETALHES</a>
+            </div>
+          </div>
+
+          <!-- Pedido #3 - PROCESSANDO -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-number">PEDIDO #880029</span>
+              <span class="order-date">28 de Setembro, 2023</span>
+            </div>
+            <div class="order-products">
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury accessory.png" alt="Produto 1">
+              </div>
+              <div class="order-product-thumb more">+1</div>
+            </div>
+            <div class="order-details">
+              <div class="order-status-group">
+                <span class="order-status processing">PROCESSANDO</span>
+                <span class="order-price">R$ 950,00</span>
+              </div>
+              <a href="#" class="order-details-link">VER DETALHES</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="orders-footer">
+        <p class="footer-brand">MODA MINIMALISTA</p>
+        <div class="footer-nav">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Shipping</a>
+          <a href="#">Contact</a>
+        </div>
+        <p class="footer-copy">© 2024 MODA MINIMALISTA</p>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <div class="bottom-nav">
+        <button class="nav-icon" aria-label="Início">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Busca">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Perfil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
