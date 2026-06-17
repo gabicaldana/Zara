@@ -44,7 +44,7 @@ function navigateTo(page) {
 // BOTTOM NAVIGATION
 // ============================================
 
-function setupBottomNav(currentPage) {
+function setupBottomNav() {
     const navIcons = document.querySelectorAll('.bottom-nav .nav-icon, .bottom-nav-icon');
     const navMap = {
         0: 'home',
@@ -54,11 +54,7 @@ function setupBottomNav(currentPage) {
     };
     
     navIcons.forEach((icon, index) => {
-        // Remove eventos antigos
-        const newIcon = icon.cloneNode(true);
-        icon.parentNode.replaceChild(newIcon, icon);
-        
-        newIcon.addEventListener('click', function(e) {
+        icon.addEventListener('click', function(e) {
             e.preventDefault();
             const page = navMap[index];
             if (page) {
@@ -73,7 +69,7 @@ function setupBottomNav(currentPage) {
 // ============================================
 
 function setupHeaderIcons() {
-    // Botão voltar - em todas as páginas exceto index
+    // Botão voltar
     const backBtns = document.querySelectorAll('.header-icon[aria-label="Voltar"]');
     backBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
@@ -82,8 +78,8 @@ function setupHeaderIcons() {
         });
     });
 
-    // Botão menu (hambúrguer)
-    const menuBtns = document.querySelectorAll('.header-icon[aria-label="Menu"]');
+    // Botão menu (hambúrguer) - FINALIZE-HEADER
+    const menuBtns = document.querySelectorAll('.header-icon[aria-label="Menu"], .finalize-header .header-icon:first-child');
     menuBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -91,8 +87,15 @@ function setupHeaderIcons() {
         });
     });
 
-    // Botão carrinho - em todas as páginas
-    const cartBtns = document.querySelectorAll('.header-icon[aria-label="Carrinho"]');
+    // Botão carrinho - em todas as páginas (seletores específicos)
+    const cartBtns = document.querySelectorAll(
+        '.header-icon[aria-label="Carrinho"], ' +
+        '.finalize-header .header-icon:last-child, ' +
+        '.orders-header .header-icon:last-child, ' +
+        '.login-header .header-icon:last-child, ' +
+        '.menu-header .header-icon:last-child, ' +
+        '.search-header .header-icon:last-child'
+    );
     cartBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -121,22 +124,21 @@ function setupFooterLinks() {
 // ============================================
 
 function setupHomeProducts() {
-    // Produto em destaque (Featured Product)
-    const featuredProduct = document.querySelector('.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"]');
-    if (featuredProduct) {
-        featuredProduct.style.cursor = 'pointer';
-        featuredProduct.addEventListener('click', function(e) {
-            // Evita clique no coração
+    // Produto em destaque (Featured Product) - clica na imagem
+    const featuredImage = document.querySelector('.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] .frame[data-name="Background"] > .frame');
+    if (featuredImage) {
+        featuredImage.style.cursor = 'pointer';
+        featuredImage.addEventListener('click', function(e) {
             if (e.target.closest('.featured-heart')) return;
             navigateTo('product');
         });
     }
 
-    // Produtos da grade assimétrica
-    const gridProducts = document.querySelectorAll('.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Container"]:nth-of-type(2), .frame[data-name="Asymmetric Grid Section"] .frame[data-name="Container"]:nth-of-type(3)');
-    gridProducts.forEach(product => {
-        product.style.cursor = 'pointer';
-        product.addEventListener('click', function() {
+    // Produtos da grade assimétrica - clica nas imagens
+    const gridImages = document.querySelectorAll('.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] > .frame');
+    gridImages.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function() {
             navigateTo('product');
         });
     });
@@ -163,12 +165,12 @@ function setupMenuLinks() {
             const label = this.querySelector('.item-label');
             if (label) {
                 const text = label.textContent.trim();
-                // Mapeia os itens do menu para páginas específicas
+                // Mapeia os itens do menu
                 const menuMap = {
-                    'NEW ARRIVALS': 'search',
-                    'COLLECTIONS': 'search',
-                    'MEN': 'search',
-                    'WOMEN': 'search',
+                    'NEW ARRIVALS': 'home',
+                    'COLLECTIONS': 'home',
+                    'MEN': 'home',
+                    'WOMEN': 'home',
                     'ACCOUNT': 'login'
                 };
                 const target = menuMap[text] || 'home';
@@ -183,12 +185,20 @@ function setupMenuLinks() {
 // ============================================
 
 function setupCartItems() {
-    const cartItems = document.querySelectorAll('.cart-item');
-    cartItems.forEach(item => {
-        item.style.cursor = 'pointer';
-        item.addEventListener('click', function(e) {
-            // Evita clique nos botões de quantidade
-            if (e.target.closest('.cart-quantity button')) return;
+    // Imagens dos itens do carrinho
+    const cartImages = document.querySelectorAll('.cart-item-media');
+    cartImages.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function(e) {
+            navigateTo('product');
+        });
+    });
+
+    // Nomes dos produtos no carrinho
+    const cartTitles = document.querySelectorAll('.cart-item-title');
+    cartTitles.forEach(title => {
+        title.style.cursor = 'pointer';
+        title.addEventListener('click', function() {
             navigateTo('product');
         });
     });
@@ -208,10 +218,21 @@ function setupCartItems() {
 // ============================================
 
 function setupConfirmationProducts() {
+    // Cada produto recomendado na página de confirmação
     const products = document.querySelectorAll('.product-item');
     products.forEach(item => {
         item.style.cursor = 'pointer';
         item.addEventListener('click', function() {
+            navigateTo('product');
+        });
+    });
+
+    // Também as thumbs dos produtos
+    const thumbs = document.querySelectorAll('.product-thumb');
+    thumbs.forEach(thumb => {
+        thumb.style.cursor = 'pointer';
+        thumb.addEventListener('click', function(e) {
+            e.stopPropagation();
             navigateTo('product');
         });
     });
@@ -266,10 +287,8 @@ function setupAccordion() {
         row.addEventListener('click', function(e) {
             e.stopPropagation();
             const icon = this.querySelector('.accordion-icon');
-            // Verifica se existe conteúdo após o row
             let content = this.nextElementSibling;
             
-            // Se não houver conteúdo, cria um
             if (!content || !content.classList.contains('accordion-content')) {
                 const label = this.querySelector('span:first-child');
                 if (label) {
@@ -385,7 +404,6 @@ function setupPaymentOptions() {
     options.forEach(option => {
         option.style.cursor = 'pointer';
         option.addEventListener('click', function() {
-            // Remove seleção anterior
             document.querySelectorAll('.payment-option').forEach(opt => {
                 opt.style.opacity = '0.5';
             });
@@ -532,7 +550,6 @@ function setupOrderCards() {
     const cards = document.querySelectorAll('.order-card');
     cards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Evita clique nos links internos
             if (e.target.closest('.order-details-link')) return;
             const orderNumber = this.querySelector('.order-number');
             if (orderNumber) {
@@ -547,14 +564,12 @@ function setupOrderCards() {
 // ============================================
 
 function initApp() {
-    // Detecta a página atual
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const currentPage = currentPath.replace('.html', '');
     
     console.log(`📱 Inicializando: ${currentPage}`);
     
-    // Configura todos os componentes
-    setupBottomNav(currentPage);
+    setupBottomNav();
     setupHeaderIcons();
     setupFooterLinks();
     setupHomeProducts();
@@ -581,5 +596,4 @@ function initApp() {
     console.log('✅ App inicializado com sucesso!');
 }
 
-// Aguarda o DOM carregar
 document.addEventListener('DOMContentLoaded', initApp);
