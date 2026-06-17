@@ -217,16 +217,21 @@ body {
   margin: 12px 0;
 }
 
-/* Asymmetric Grid Section */
+/* ============================================
+   ASYMMETRIC GRID SECTION - CORRIGIDO
+   ============================================ */
+
 .frame[data-name="Asymmetric Grid Section"] {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   width: 350px;
   gap: 0;
+  justify-content: space-between;
 }
 
 .frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:first-of-type {
-  width: 350px;
+  width: 100%;
   padding: 0px 0px 16px;
 }
 
@@ -245,27 +250,27 @@ body {
   color: #000000;
 }
 
-/* Grid product containers */
+/* Cada produto da grade - ocupa 50% */
 .frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:nth-of-type(2),
 .frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:nth-of-type(3) {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 50%;
+  gap: 12px;
+  width: calc(50% - 6px);
+  box-sizing: border-box;
 }
 
 .frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:nth-of-type(2) {
-  float: left;
-  width: calc(50% - 8px);
-  margin-right: 8px;
+  margin-right: 0;
+  float: none;
 }
 
 .frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:nth-of-type(3) {
-  float: right;
-  width: calc(50% - 8px);
-  margin-left: 8px;
+  margin-left: 0;
+  float: none;
 }
 
+/* Background da imagem do produto */
 .frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] {
   display: flex;
   flex-direction: column;
@@ -275,15 +280,24 @@ body {
   width: 100%;
   position: relative;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] > .frame {
   width: 100%;
-  height: 253.5px;
+  height: 200px;
   background: #EEEEEE;
   overflow: hidden;
 }
 
+.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] > .frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Nome do produto */
 .text[data-name="VESTIDO LINHO"],
 .text[data-name="BOTA COURO"] {
   font-family: 'Hanken Grotesk', sans-serif;
@@ -292,8 +306,10 @@ body {
   line-height: 1.2em;
   letter-spacing: 10%;
   color: #000000;
+  text-transform: uppercase;
 }
 
+/* Preço */
 .text[data-name="R$ 299,00"],
 .text[data-name="R$ 759,00"] {
   font-family: 'Hanken Grotesk', sans-serif;
@@ -301,6 +317,26 @@ body {
   font-size: 14px;
   line-height: 1.5em;
   color: #5D5F5F;
+}
+
+/* Container de texto do produto (nome + preço) */
+.frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"] .frame[data-name="Container"] {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ============================================
+   CORREÇÃO - TÍTULO NOVIDADES
+   ============================================ */
+.frame[data-name="Asymmetric Grid Section"] .text[data-name="Novidades"] {
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2em;
+  letter-spacing: -2%;
+  color: #000000;
+  margin-bottom: 4px;
 }
 
 /* CTA Button */
@@ -1311,343 +1347,343 @@ body {
   box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
-    /* ===== Página de confirmação ===== */
-    html, body {
-      min-height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    }
-    body {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      background: #FFFFFF;
-      min-height: 100vh;
-      padding: 20px 0;
-    }
-    .stage {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      width: 100%;
-    }
-    .frame {
-      box-sizing: border-box;
-    }
-    .frame img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .text {
-      color: #000;
-      margin: 0;
-      font-family: inherit;
-    }
-    /* ===== Estilos específicos da tela de confirmação (finalização) ===== */
-    .finalize-frame {
-      width: 402px;
-      background: #F9F9F9;
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-    }
-    /* Header com logo ZARA (igual ao das outras telas) */
-    .finalize-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      background: #F9F9F9;
-      border-bottom: 1px solid #CFC4C5;
-      position: relative;
-      z-index: 2;
-    }
-    .finalize-header .header-icon {
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .finalize-header .header-icon svg {
-      width: 100%;
-      height: 100%;
-    }
-    .finalize-logo {
-      font-family: 'Libre Caslon Text', serif;
-      font-weight: 400;
-      font-size: 28px;
-      line-height: 1.2;
-      letter-spacing: -5%;
-      color: #000000;
-      margin: 0;
-      flex: 1;
-      text-align: center;
-    }
-    /* Main content */
-    .finalize-main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 48px;
-      padding: 48px 20px 160px 20px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    /* Confirmation card */
-    .confirmation-card {
-      width: 100%;
-      background: #F3F3F3;
-      border-radius: 16px;
-      padding: 32px 24px 24px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      box-sizing: border-box;
-    }
-    .confirmation-card .thank-you {
-      font-family: 'Libre Caslon Text', serif;
-      font-weight: 400;
-      font-size: 24px;
-      line-height: 1.2;
-      letter-spacing: -2%;
-      color: #1A1C1C;
-      margin: 0;
-    }
-    .confirmation-card .order-status {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: 10%;
-      text-transform: uppercase;
-      color: #000000;
-      margin: 0;
-      margin-top: 4px;
-    }
-    .confirmation-card .divider {
-      width: 96px;
-      height: 1.5px;
-      background: #000000;
-      margin: 12px 0 8px 0;
-    }
-    .confirmation-card .order-number {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      color: #5D5F5F;
-      margin: 0;
-    }
-    .confirmation-card .cta-link {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 12px;
-      letter-spacing: 10%;
-      text-transform: uppercase;
-      color: #000000;
-      text-decoration: none;
-      border-bottom: 1px solid #000000;
-      padding-bottom: 2px;
-      margin-top: 8px;
-      cursor: pointer;
-    }
-    .confirmation-card .cta-link:hover {
-      opacity: 0.7;
-    }
-    /* You may also like */
-    .also-like {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .also-like .section-label {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 12px;
-      letter-spacing: 10%;
-      text-transform: uppercase;
-      color: #1A1C1C;
-      margin: 0;
-    }
-    .also-like .product-row {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .also-like .product-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 12px 16px 12px 12px;
-      background: #F3F3F3;
-      border-radius: 16px;
-    }
-    .also-like .product-item .product-thumb {
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      overflow: hidden;
-      flex-shrink: 0;
-      background: #E0E0E0;
-    }
-    .also-like .product-item .product-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .also-like .product-item .product-info {
-      flex: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .also-like .product-item .product-name {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      color: #1A1C1C;
-      margin: 0;
-    }
-    .also-like .product-item .product-price {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      color: #5D5F5F;
-      margin: 0;
-    }
-    /* Rodapé (footer) igual ao da home */
-    .finalize-footer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 48px 20px;
-      width: 100%;
-      background: #F3F3F3;
-      border-top: 1px solid #CFC4C5;
-      box-sizing: border-box;
-    }
-    .finalize-footer .footer-brand {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 12px;
-      line-height: 1.2;
-      letter-spacing: 10%;
-      color: #1A1C1C;
-      margin: 0;
-    }
-    .finalize-footer .footer-nav {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 0 0 0;
-    }
-    .finalize-footer .footer-nav a {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.5;
-      color: #5D5F5F;
-      text-decoration: none;
-    }
-    .finalize-footer .footer-nav a:hover {
-      text-decoration: underline;
-    }
-    .finalize-footer .footer-copy {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.5;
-      opacity: 0.6;
-      color: #1A1C1C;
-      margin: 16px 0 0 0;
-    }
-    /* Bottom navigation (igual ao style.css) */
-    .bottom-nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      width: 100%;
-      height: 64px;
-      background: #F9F9F9;
-      border-top: 1px solid #CFC4C5;
-      box-sizing: border-box;
-    }
-    .bottom-nav .nav-icon {
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-    }
-    .bottom-nav .nav-icon svg {
-      width: 20px;
-      height: 20px;
-    }
-    /* Ajuste para telas pequenas */
-    @media (max-width: 420px) {
-      .finalize-frame {
-        width: 100%;
-        max-width: 402px;
-      }
-    }
-    
+/* ===== Página de confirmação ===== */
+html, body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #FFFFFF;
+  min-height: 100vh;
+  padding: 20px 0;
+}
+.stage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+.frame {
+  box-sizing: border-box;
+}
+.frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.text {
+  color: #000;
+  margin: 0;
+  font-family: inherit;
+}
+/* ===== Estilos específicos da tela de confirmação (finalização) ===== */
+.finalize-frame {
+  width: 402px;
+  background: #F9F9F9;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+/* Header com logo ZARA (igual ao das outras telas) */
+.finalize-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #F9F9F9;
+  border-bottom: 1px solid #CFC4C5;
+  position: relative;
+  z-index: 2;
+}
+.finalize-header .header-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.finalize-header .header-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.finalize-logo {
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -5%;
+  color: #000000;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+/* Main content */
+.finalize-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  padding: 48px 20px 160px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* Confirmation card */
+.confirmation-card {
+  width: 100%;
+  background: #F3F3F3;
+  border-radius: 16px;
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+}
+.confirmation-card .thank-you {
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -2%;
+  color: #1A1C1C;
+  margin: 0;
+}
+.confirmation-card .order-status {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
+  margin-top: 4px;
+}
+.confirmation-card .divider {
+  width: 96px;
+  height: 1.5px;
+  background: #000000;
+  margin: 12px 0 8px 0;
+}
+.confirmation-card .order-number {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #5D5F5F;
+  margin: 0;
+}
+.confirmation-card .cta-link {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 2px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+.confirmation-card .cta-link:hover {
+  opacity: 0.7;
+}
+/* You may also like */
+.also-like {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.also-like .section-label {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: #1A1C1C;
+  margin: 0;
+}
+.also-like .product-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.also-like .product-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px 12px 12px;
+  background: #F3F3F3;
+  border-radius: 16px;
+}
+.also-like .product-item .product-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #E0E0E0;
+}
+.also-like .product-item .product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.also-like .product-item .product-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.also-like .product-item .product-name {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1A1C1C;
+  margin: 0;
+}
+.also-like .product-item .product-price {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #5D5F5F;
+  margin: 0;
+}
+/* Rodapé (footer) igual ao da home */
+.finalize-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 20px;
+  width: 100%;
+  background: #F3F3F3;
+  border-top: 1px solid #CFC4C5;
+  box-sizing: border-box;
+}
+.finalize-footer .footer-brand {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 10%;
+  color: #1A1C1C;
+  margin: 0;
+}
+.finalize-footer .footer-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0 0 0;
+}
+.finalize-footer .footer-nav a {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #5D5F5F;
+  text-decoration: none;
+}
+.finalize-footer .footer-nav a:hover {
+  text-decoration: underline;
+}
+.finalize-footer .footer-copy {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.6;
+  color: #1A1C1C;
+  margin: 16px 0 0 0;
+}
+/* Bottom navigation (igual ao style.css) */
+.bottom-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+  background: #F9F9F9;
+  border-top: 1px solid #CFC4C5;
+  box-sizing: border-box;
+}
+.bottom-nav .nav-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+.bottom-nav .nav-icon svg {
+  width: 20px;
+  height: 20px;
+}
+/* Ajuste para telas pequenas */
+@media (max-width: 420px) {
+  .finalize-frame {
+    width: 100%;
+    max-width: 402px;
+  }
+}
+  
 /* ============================================
    ACCORDION CONTENT (para product.html)
    ============================================ */
 .accordion-content {
-    display: none;
-    padding: 0 20px 20px 20px;
-    background: #FFFFFF;
-    font-family: 'Hanken Grotesk', sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #5D5F5F;
-    border-bottom: 1px solid #CFC4C5;
+  display: none;
+  padding: 0 20px 20px 20px;
+  background: #FFFFFF;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #5D5F5F;
+  border-bottom: 1px solid #CFC4C5;
 }
 
 .accordion-content.open {
-    display: block;
+  display: block;
 }
 
 /* ============================================
    PAYMENT - Seleção de método
    ============================================ */
 .payment-option {
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
 .payment-option:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .payment-option.selected {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 
 /* ============================================
    ORDERS - Hover nos cards
    ============================================ */
 .order-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .order-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
