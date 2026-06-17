@@ -41,7 +41,7 @@ function navigateTo(page) {
 }
 
 // ============================================
-// BOTTOM NAVIGATION - Adicionar em todas as páginas
+// BOTTOM NAVIGATION
 // ============================================
 
 function setupBottomNav(currentPage) {
@@ -54,29 +54,18 @@ function setupBottomNav(currentPage) {
     };
     
     navIcons.forEach((icon, index) => {
-        if (icon) {
-            // Remove eventos antigos para evitar duplicação
-            icon.removeEventListener('click', handleNavClick);
-            icon.addEventListener('click', handleNavClick);
-            // Armazena o índice para uso no handler
-            icon.dataset.navIndex = index;
-        }
+        // Remove eventos antigos
+        const newIcon = icon.cloneNode(true);
+        icon.parentNode.replaceChild(newIcon, icon);
+        
+        newIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            const page = navMap[index];
+            if (page) {
+                navigateTo(page);
+            }
+        });
     });
-}
-
-function handleNavClick(e) {
-    const icon = e.currentTarget;
-    const index = parseInt(icon.dataset.navIndex);
-    const navMap = {
-        0: 'home',
-        1: 'search',
-        2: 'cart',
-        3: 'login'
-    };
-    const page = navMap[index];
-    if (page) {
-        navigateTo(page);
-    }
 }
 
 // ============================================
@@ -84,38 +73,32 @@ function handleNavClick(e) {
 // ============================================
 
 function setupHeaderIcons() {
-    // Botão voltar
+    // Botão voltar - em todas as páginas exceto index
     const backBtns = document.querySelectorAll('.header-icon[aria-label="Voltar"]');
     backBtns.forEach(btn => {
-        btn.removeEventListener('click', handleBack);
-        btn.addEventListener('click', handleBack);
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('back');
+        });
     });
 
-    // Botão menu
+    // Botão menu (hambúrguer)
     const menuBtns = document.querySelectorAll('.header-icon[aria-label="Menu"]');
     menuBtns.forEach(btn => {
-        btn.removeEventListener('click', handleMenu);
-        btn.addEventListener('click', handleMenu);
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('menu');
+        });
     });
 
-    // Botão carrinho
+    // Botão carrinho - em todas as páginas
     const cartBtns = document.querySelectorAll('.header-icon[aria-label="Carrinho"]');
     cartBtns.forEach(btn => {
-        btn.removeEventListener('click', handleCart);
-        btn.addEventListener('click', handleCart);
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('cart');
+        });
     });
-}
-
-function handleBack() {
-    navigateTo('back');
-}
-
-function handleMenu() {
-    navigateTo('menu');
-}
-
-function handleCart() {
-    navigateTo('cart');
 }
 
 // ============================================
@@ -125,33 +108,113 @@ function handleCart() {
 function setupFooterLinks() {
     const footerLinks = document.querySelectorAll('.footer-nav a, .finalize-footer .footer-nav a, .orders-footer .footer-nav a, .menu-footer .footer-nav a, .search-footer .footer-nav a, .login-footer .footer-nav a');
     footerLinks.forEach(link => {
-        link.removeEventListener('click', handleFooterLink);
-        link.addEventListener('click', handleFooterLink);
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const text = this.textContent.trim().toLowerCase();
+            alert(`Navegando para: ${text}`);
+        });
     });
 }
 
-function handleFooterLink(e) {
-    e.preventDefault();
-    const text = e.currentTarget.textContent.trim().toLowerCase();
-    // Apenas simula navegação ou exibe alerta
-    alert(`Navegando para: ${text}`);
-}
-
 // ============================================
-// CONFIRMATION PAGE - "Ver meus pedidos"
+// HOME PAGE - Produtos levam para product.html
 // ============================================
 
-function setupConfirmationLinks() {
-    const orderLink = document.querySelector('.cta-link');
-    if (orderLink) {
-        orderLink.removeEventListener('click', handleOrderLink);
-        orderLink.addEventListener('click', handleOrderLink);
+function setupHomeProducts() {
+    // Produto em destaque (Featured Product)
+    const featuredProduct = document.querySelector('.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"]');
+    if (featuredProduct) {
+        featuredProduct.style.cursor = 'pointer';
+        featuredProduct.addEventListener('click', function(e) {
+            // Evita clique no coração
+            if (e.target.closest('.featured-heart')) return;
+            navigateTo('product');
+        });
+    }
+
+    // Produtos da grade assimétrica
+    const gridProducts = document.querySelectorAll('.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Container"]:nth-of-type(2), .frame[data-name="Asymmetric Grid Section"] .frame[data-name="Container"]:nth-of-type(3)');
+    gridProducts.forEach(product => {
+        product.style.cursor = 'pointer';
+        product.addEventListener('click', function() {
+            navigateTo('product');
+        });
+    });
+
+    // Botão "VER TODA A COLEÇÃO"
+    const ctaBtn = document.querySelector('.frame[data-name="CTA Section → Button"]');
+    if (ctaBtn) {
+        ctaBtn.style.cursor = 'pointer';
+        ctaBtn.addEventListener('click', function() {
+            navigateTo('search');
+        });
     }
 }
 
-function handleOrderLink(e) {
-    e.preventDefault();
-    navigateTo('orders');
+// ============================================
+// MENU PAGE - Links funcionais
+// ============================================
+
+function setupMenuLinks() {
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const label = this.querySelector('.item-label');
+            if (label) {
+                const text = label.textContent.trim();
+                // Mapeia os itens do menu para páginas específicas
+                const menuMap = {
+                    'NEW ARRIVALS': 'search',
+                    'COLLECTIONS': 'search',
+                    'MEN': 'search',
+                    'WOMEN': 'search',
+                    'ACCOUNT': 'login'
+                };
+                const target = menuMap[text] || 'home';
+                navigateTo(target);
+            }
+        });
+    });
+}
+
+// ============================================
+// CART PAGE - Produtos levam para product.html
+// ============================================
+
+function setupCartItems() {
+    const cartItems = document.querySelectorAll('.cart-item');
+    cartItems.forEach(item => {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', function(e) {
+            // Evita clique nos botões de quantidade
+            if (e.target.closest('.cart-quantity button')) return;
+            navigateTo('product');
+        });
+    });
+
+    // Recomendações no carrinho
+    const recommendations = document.querySelectorAll('.recommendation-card');
+    recommendations.forEach(rec => {
+        rec.style.cursor = 'pointer';
+        rec.addEventListener('click', function() {
+            navigateTo('product');
+        });
+    });
+}
+
+// ============================================
+// CONFIRMATION PAGE - Produtos recomendados
+// ============================================
+
+function setupConfirmationProducts() {
+    const products = document.querySelectorAll('.product-item');
+    products.forEach(item => {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', function() {
+            navigateTo('product');
+        });
+    });
 }
 
 // ============================================
@@ -161,20 +224,17 @@ function handleOrderLink(e) {
 function setupProductSizes() {
     const sizeOptions = document.querySelectorAll('.size-option');
     sizeOptions.forEach(option => {
-        option.removeEventListener('click', handleSizeSelect);
-        option.addEventListener('click', handleSizeSelect);
-    });
-}
-
-function handleSizeSelect(e) {
-    const selected = e.currentTarget;
-    const parent = selected.closest('.attribute-sizes');
-    if (parent) {
-        parent.querySelectorAll('.size-option').forEach(opt => {
-            opt.classList.remove('selected');
+        option.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const parent = this.closest('.attribute-sizes');
+            if (parent) {
+                parent.querySelectorAll('.size-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            }
         });
-        selected.classList.add('selected');
-    }
+    });
 }
 
 // ============================================
@@ -184,18 +244,15 @@ function handleSizeSelect(e) {
 function setupProductButton() {
     const addBtn = document.querySelector('.product-button');
     if (addBtn) {
-        addBtn.removeEventListener('click', handleAddToCart);
-        addBtn.addEventListener('click', handleAddToCart);
-    }
-}
-
-function handleAddToCart() {
-    const selectedSize = document.querySelector('.size-option.selected');
-    const sizeText = selectedSize ? selectedSize.textContent : 'P';
-    alert(`Produto adicionado ao carrinho!\nTamanho: ${sizeText}`);
-    // Redireciona para o carrinho após confirmação
-    if (confirm('Deseja ir para o carrinho agora?')) {
-        navigateTo('cart');
+        addBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const selectedSize = document.querySelector('.size-option.selected');
+            const sizeText = selectedSize ? selectedSize.textContent : 'P';
+            alert(`Produto adicionado ao carrinho!\nTamanho: ${sizeText}`);
+            if (confirm('Deseja ir para o carrinho agora?')) {
+                navigateTo('cart');
+            }
+        });
     }
 }
 
@@ -206,29 +263,28 @@ function handleAddToCart() {
 function setupAccordion() {
     const accordionRows = document.querySelectorAll('.accordion-row');
     accordionRows.forEach(row => {
-        row.removeEventListener('click', handleAccordion);
-        row.addEventListener('click', handleAccordion);
+        row.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const icon = this.querySelector('.accordion-icon');
+            // Verifica se existe conteúdo após o row
+            let content = this.nextElementSibling;
+            
+            // Se não houver conteúdo, cria um
+            if (!content || !content.classList.contains('accordion-content')) {
+                const label = this.querySelector('span:first-child');
+                if (label) {
+                    alert(`Expandindo: ${label.textContent}`);
+                }
+                return;
+            }
+            
+            const isOpen = content.style.display !== 'none';
+            content.style.display = isOpen ? 'none' : 'block';
+            if (icon) {
+                icon.textContent = isOpen ? '+' : '−';
+            }
+        });
     });
-}
-
-function handleAccordion(e) {
-    const row = e.currentTarget;
-    const icon = row.querySelector('.accordion-icon');
-    const content = row.nextElementSibling;
-    
-    if (content && content.classList.contains('accordion-content')) {
-        const isOpen = content.style.display !== 'none';
-        content.style.display = isOpen ? 'none' : 'block';
-        if (icon) {
-            icon.textContent = isOpen ? '+' : '−';
-        }
-    } else {
-        // Se não houver conteúdo, apenas simula
-        const label = row.querySelector('span:first-child');
-        if (label) {
-            alert(`Expandindo: ${label.textContent}`);
-        }
-    }
 }
 
 // ============================================
@@ -243,41 +299,28 @@ function setupCartQuantity() {
         const span = group.querySelector('span');
         
         if (minusBtn) {
-            minusBtn.removeEventListener('click', handleQuantityMinus);
-            minusBtn.addEventListener('click', handleQuantityMinus);
+            minusBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (span) {
+                    let val = parseInt(span.textContent) || 1;
+                    if (val > 1) {
+                        val--;
+                        span.textContent = val;
+                    }
+                }
+            });
         }
         if (plusBtn) {
-            plusBtn.removeEventListener('click', handleQuantityPlus);
-            plusBtn.addEventListener('click', handleQuantityPlus);
-        }
-        
-        // Armazena referência ao span
-        if (span) {
-            group.dataset.quantitySpan = span.textContent;
+            plusBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (span) {
+                    let val = parseInt(span.textContent) || 1;
+                    val++;
+                    span.textContent = val;
+                }
+            });
         }
     });
-}
-
-function handleQuantityMinus(e) {
-    const group = e.currentTarget.closest('.cart-quantity');
-    const span = group.querySelector('span');
-    if (span) {
-        let val = parseInt(span.textContent) || 1;
-        if (val > 1) {
-            val--;
-            span.textContent = val;
-        }
-    }
-}
-
-function handleQuantityPlus(e) {
-    const group = e.currentTarget.closest('.cart-quantity');
-    const span = group.querySelector('span');
-    if (span) {
-        let val = parseInt(span.textContent) || 1;
-        val++;
-        span.textContent = val;
-    }
 }
 
 // ============================================
@@ -289,21 +332,32 @@ function setupCartActions() {
     const secondaryBtn = document.querySelector('.cart-action.secondary');
     
     if (primaryBtn) {
-        primaryBtn.removeEventListener('click', handleCheckout);
-        primaryBtn.addEventListener('click', handleCheckout);
+        primaryBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('payment');
+        });
     }
     if (secondaryBtn) {
-        secondaryBtn.removeEventListener('click', handleContinueShopping);
-        secondaryBtn.addEventListener('click', handleContinueShopping);
+        secondaryBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('home');
+        });
     }
 }
 
-function handleCheckout() {
-    navigateTo('payment');
-}
+// ============================================
+// PAYMENT PAGE - Botão "X" (fechar)
+// ============================================
 
-function handleContinueShopping() {
-    navigateTo('home');
+function setupPaymentClose() {
+    // O "X" no header do payment é o ícone à esquerda
+    const closeBtn = document.querySelector('.payment-wrapper .header .header-icon:first-child');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('home');
+        });
+    }
 }
 
 // ============================================
@@ -313,126 +367,12 @@ function handleContinueShopping() {
 function setupPaymentButton() {
     const finalizeBtn = document.querySelector('.finalize-button');
     if (finalizeBtn) {
-        finalizeBtn.removeEventListener('click', handleFinalize);
-        finalizeBtn.addEventListener('click', handleFinalize);
-    }
-}
-
-function handleFinalize() {
-    if (confirm('Confirmar pagamento?')) {
-        navigateTo('confirmation');
-    }
-}
-
-// ============================================
-// LOGIN PAGE - Formulário
-// ============================================
-
-function setupLoginForm() {
-    const form = document.querySelector('.login-form');
-    if (form) {
-        form.removeEventListener('submit', handleLogin);
-        form.addEventListener('submit', handleLogin);
-    }
-}
-
-function handleLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    
-    if (email && password) {
-        if (email.value.trim() && password.value.trim()) {
-            alert('Login realizado com sucesso!');
-            navigateTo('home');
-        } else {
-            alert('Por favor, preencha todos os campos.');
-        }
-    }
-}
-
-// ============================================
-// MENU PAGE - Links do menu
-// ============================================
-
-function setupMenuLinks() {
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(item => {
-        item.removeEventListener('click', handleMenuClick);
-        item.addEventListener('click', handleMenuClick);
-    });
-}
-
-function handleMenuClick(e) {
-    e.preventDefault();
-    const label = e.currentTarget.querySelector('.item-label');
-    if (label) {
-        alert(`Navegando para: ${label.textContent}`);
-        // Aqui você pode redirecionar para páginas específicas
-        // Exemplo: if (label.textContent === 'NEW ARRIVALS') navigateTo('search');
-    }
-}
-
-// ============================================
-// SEARCH PAGE - Correção de termo
-// ============================================
-
-function setupSearchCorrection() {
-    const correction = document.querySelector('.correction');
-    if (correction) {
-        correction.removeEventListener('click', handleCorrection);
-        correction.addEventListener('click', handleCorrection);
-    }
-}
-
-function handleCorrection() {
-    const input = document.querySelector('.search-input-wrapper input');
-    if (input) {
-        input.value = 'Calça';
-        alert('Termo corrigido para: Calça');
-    }
-}
-
-// ============================================
-// SEARCH PAGE - Sugestões de produtos
-// ============================================
-
-function setupSearchSuggestions() {
-    const suggestions = document.querySelectorAll('.search-suggestion-item');
-    suggestions.forEach(item => {
-        item.removeEventListener('click', handleSuggestionClick);
-        item.addEventListener('click', handleSuggestionClick);
-    });
-}
-
-function handleSuggestionClick(e) {
-    e.preventDefault();
-    const name = e.currentTarget.querySelector('.product-name');
-    if (name) {
-        alert(`Visualizando: ${name.textContent}`);
-        navigateTo('product');
-    }
-}
-
-// ============================================
-// ORDERS PAGE - "VER DETALHES"
-// ============================================
-
-function setupOrderDetails() {
-    const detailLinks = document.querySelectorAll('.order-details-link');
-    detailLinks.forEach(link => {
-        link.removeEventListener('click', handleOrderDetails);
-        link.addEventListener('click', handleOrderDetails);
-    });
-}
-
-function handleOrderDetails(e) {
-    e.preventDefault();
-    const card = e.currentTarget.closest('.order-card');
-    const orderNumber = card ? card.querySelector('.order-number') : null;
-    if (orderNumber) {
-        alert(`Visualizando detalhes do ${orderNumber.textContent}`);
-        // Aqui você pode redirecionar para uma página de detalhes do pedido
+        finalizeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Confirmar pagamento?')) {
+                navigateTo('confirmation');
+            }
+        });
     }
 }
 
@@ -443,24 +383,19 @@ function handleOrderDetails(e) {
 function setupPaymentOptions() {
     const options = document.querySelectorAll('.payment-option');
     options.forEach(option => {
-        option.removeEventListener('click', handlePaymentSelect);
-        option.addEventListener('click', handlePaymentSelect);
-        // Adiciona estilo de cursor pointer
         option.style.cursor = 'pointer';
-    });
-}
-
-function handlePaymentSelect(e) {
-    const option = e.currentTarget;
-    const text = option.querySelector('.payment-text');
-    if (text) {
-        // Remove seleção anterior
-        document.querySelectorAll('.payment-option').forEach(opt => {
-            opt.style.opacity = '0.5';
+        option.addEventListener('click', function() {
+            // Remove seleção anterior
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.style.opacity = '0.5';
+            });
+            this.style.opacity = '1';
+            const text = this.querySelector('.payment-text');
+            if (text) {
+                alert(`Método de pagamento selecionado: ${text.textContent}`);
+            }
         });
-        option.style.opacity = '1';
-        alert(`Método de pagamento selecionado: ${text.textContent}`);
-    }
+    });
 }
 
 // ============================================
@@ -472,21 +407,139 @@ function setupAddressActions() {
     const registerBtn = document.querySelector('.register-address-btn');
     
     if (editBtn) {
-        editBtn.removeEventListener('click', handleEditAddress);
-        editBtn.addEventListener('click', handleEditAddress);
+        editBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Editar endereço: Rua Oscar Freire, 1000');
+        });
     }
     if (registerBtn) {
-        registerBtn.removeEventListener('click', handleRegisterAddress);
-        registerBtn.addEventListener('click', handleRegisterAddress);
+        registerBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Cadastrar novo endereço');
+        });
     }
 }
 
-function handleEditAddress() {
-    alert('Editar endereço: Rua Oscar Freire, 1000');
+// ============================================
+// CONFIRMATION PAGE - "Ver meus pedidos"
+// ============================================
+
+function setupConfirmationLinks() {
+    const orderLink = document.querySelector('.cta-link');
+    if (orderLink) {
+        orderLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('orders');
+        });
+    }
 }
 
-function handleRegisterAddress() {
-    alert('Cadastrar novo endereço');
+// ============================================
+// LOGIN PAGE - Formulário
+// ============================================
+
+function setupLoginForm() {
+    const form = document.querySelector('.login-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            
+            if (email && password) {
+                if (email.value.trim() && password.value.trim()) {
+                    alert('Login realizado com sucesso!');
+                    navigateTo('home');
+                } else {
+                    alert('Por favor, preencha todos os campos.');
+                }
+            }
+        });
+    }
+}
+
+// ============================================
+// LOGIN PAGE - Botões sociais
+// ============================================
+
+function setupSocialButtons() {
+    const socialBtns = document.querySelectorAll('.social-btn');
+    socialBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const text = this.textContent.trim();
+            alert(`Continuar com ${text}`);
+            navigateTo('home');
+        });
+    });
+}
+
+// ============================================
+// SEARCH PAGE - Correção de termo
+// ============================================
+
+function setupSearchCorrection() {
+    const correction = document.querySelector('.correction');
+    if (correction) {
+        correction.addEventListener('click', function(e) {
+            e.preventDefault();
+            const input = document.querySelector('.search-input-wrapper input');
+            if (input) {
+                input.value = 'Calça';
+                alert('Termo corrigido para: Calça');
+            }
+        });
+    }
+}
+
+// ============================================
+// SEARCH PAGE - Sugestões de produtos
+// ============================================
+
+function setupSearchSuggestions() {
+    const suggestions = document.querySelectorAll('.search-suggestion-item');
+    suggestions.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('product');
+        });
+    });
+}
+
+// ============================================
+// ORDERS PAGE - "VER DETALHES"
+// ============================================
+
+function setupOrderDetails() {
+    const detailLinks = document.querySelectorAll('.order-details-link');
+    detailLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const card = this.closest('.order-card');
+            const orderNumber = card ? card.querySelector('.order-number') : null;
+            if (orderNumber) {
+                alert(`Visualizando detalhes do ${orderNumber.textContent}`);
+            }
+        });
+    });
+}
+
+// ============================================
+// ORDERS PAGE - Clique no card do pedido
+// ============================================
+
+function setupOrderCards() {
+    const cards = document.querySelectorAll('.order-card');
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Evita clique nos links internos
+            if (e.target.closest('.order-details-link')) return;
+            const orderNumber = this.querySelector('.order-number');
+            if (orderNumber) {
+                alert(`Visualizando detalhes do ${orderNumber.textContent}`);
+            }
+        });
+    });
 }
 
 // ============================================
@@ -504,20 +557,26 @@ function initApp() {
     setupBottomNav(currentPage);
     setupHeaderIcons();
     setupFooterLinks();
-    setupConfirmationLinks();
+    setupHomeProducts();
+    setupMenuLinks();
+    setupCartItems();
+    setupCartQuantity();
+    setupCartActions();
     setupProductSizes();
     setupProductButton();
     setupAccordion();
-    setupCartQuantity();
-    setupCartActions();
+    setupPaymentClose();
     setupPaymentButton();
+    setupPaymentOptions();
+    setupAddressActions();
+    setupConfirmationLinks();
+    setupConfirmationProducts();
     setupLoginForm();
-    setupMenuLinks();
+    setupSocialButtons();
     setupSearchCorrection();
     setupSearchSuggestions();
     setupOrderDetails();
-    setupPaymentOptions();
-    setupAddressActions();
+    setupOrderCards();
     
     console.log('✅ App inicializado com sucesso!');
 }
