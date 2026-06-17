@@ -78,8 +78,8 @@ function setupHeaderIcons() {
         });
     });
 
-    // Botão menu (hambúrguer) - FINALIZE-HEADER
-    const menuBtns = document.querySelectorAll('.header-icon[aria-label="Menu"], .finalize-header .header-icon:first-child');
+    // Botão menu (hambúrguer)
+    const menuBtns = document.querySelectorAll('.header-icon[aria-label="Menu"]');
     menuBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -87,18 +87,29 @@ function setupHeaderIcons() {
         });
     });
 
-    // Botão carrinho - em todas as páginas (seletores específicos)
+    // Botão carrinho - CORRIGIDO: seletores mais específicos
     const cartBtns = document.querySelectorAll(
+        // Header padrão
         '.header-icon[aria-label="Carrinho"], ' +
+        // Finalize (confirmação)
         '.finalize-header .header-icon:last-child, ' +
+        // Orders (pedidos)
         '.orders-header .header-icon:last-child, ' +
+        // Login
         '.login-header .header-icon:last-child, ' +
+        // Menu
         '.menu-header .header-icon:last-child, ' +
-        '.search-header .header-icon:last-child'
+        // Search (busca)
+        '.search-header .header-icon:last-child, ' +
+        // Product (produto)
+        '.product-topbar .header-icon:last-child, ' +
+        // Cart (carrinho) - o próprio ícone do carrinho no header
+        '.cart-topbar .header-icon:last-child'
     );
     cartBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             navigateTo('cart');
         });
     });
@@ -124,7 +135,7 @@ function setupFooterLinks() {
 // ============================================
 
 function setupHomeProducts() {
-    // Produto em destaque (Featured Product) - clica na imagem
+    // Produto em destaque (Featured Product)
     const featuredImage = document.querySelector('.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] .frame[data-name="Background"] > .frame');
     if (featuredImage) {
         featuredImage.style.cursor = 'pointer';
@@ -134,7 +145,7 @@ function setupHomeProducts() {
         });
     }
 
-    // Produtos da grade assimétrica - clica nas imagens
+    // Produtos da grade assimétrica
     const gridImages = document.querySelectorAll('.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] > .frame');
     gridImages.forEach(img => {
         img.style.cursor = 'pointer';
@@ -154,7 +165,7 @@ function setupHomeProducts() {
 }
 
 // ============================================
-// MENU PAGE - Links funcionais
+// MENU PAGE - Links funcionais (CORRIGIDO)
 // ============================================
 
 function setupMenuLinks() {
@@ -167,11 +178,11 @@ function setupMenuLinks() {
                 const text = label.textContent.trim();
                 // Mapeia os itens do menu
                 const menuMap = {
-                    'NEW ARRIVALS': 'home',
-                    'COLLECTIONS': 'home',
-                    'MEN': 'home',
-                    'WOMEN': 'home',
-                    'ACCOUNT': 'login'
+                    'NEW ARRIVALS': 'home',    // → HOME
+                    'COLLECTIONS': 'home',      // → HOME
+                    'MEN': 'home',              // → HOME
+                    'WOMEN': 'home',            // → HOME
+                    'ACCOUNT': 'login'          // → LOGIN
                 };
                 const target = menuMap[text] || 'home';
                 navigateTo(target);
@@ -218,7 +229,6 @@ function setupCartItems() {
 // ============================================
 
 function setupConfirmationProducts() {
-    // Cada produto recomendado na página de confirmação
     const products = document.querySelectorAll('.product-item');
     products.forEach(item => {
         item.style.cursor = 'pointer';
@@ -227,7 +237,6 @@ function setupConfirmationProducts() {
         });
     });
 
-    // Também as thumbs dos produtos
     const thumbs = document.querySelectorAll('.product-thumb');
     thumbs.forEach(thumb => {
         thumb.style.cursor = 'pointer';
@@ -369,7 +378,6 @@ function setupCartActions() {
 // ============================================
 
 function setupPaymentClose() {
-    // O "X" no header do payment é o ícone à esquerda
     const closeBtn = document.querySelector('.payment-wrapper .header .header-icon:first-child');
     if (closeBtn) {
         closeBtn.addEventListener('click', function(e) {
