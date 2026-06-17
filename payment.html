@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - Zara</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- fonts (fallback) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script src="script.js"></script>
+    <div class="payment-wrapper">
+
+    <!-- Header - TopAppBar (exactly like image) -->
+    <header class="header">
+        <div class="header-icon left-icon">
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L16 16M16 1L1 16" stroke="#1A1C1C" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <h1 class="header-title">ZARA</h1>
+        <button class="header-icon" aria-label="Carrinho">
+          <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="4" width="11" height="14" stroke="#000" stroke-width="1.5"/>
+            <path d="M4 4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Section - Page Title (Pagamento) -->
+        <section class="section-title">
+            <h2 class="page-heading">Pagamento</h2>
+        </section>
+
+        <!-- Section - Formas de Pagamento -->
+        <section class="section-payment-methods">
+            <h3 class="section-subtitle">Formas de pagamento:</h3>
+
+            <div class="payment-options-container">
+                <!-- Pix -->
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.5" width="55" height="39" rx="5.5" fill="white" stroke="#CFC4C5"/>
+                            <path d="M28 12L22 18L28 24L34 18L28 12Z" fill="#1A1C1C"/>
+                            <path d="M22 18L16 24L22 30L28 24L22 18Z" fill="#1A1C1C" opacity="0.6"/>
+                            <path d="M34 18L28 24L34 30L40 24L34 18Z" fill="#1A1C1C" opacity="0.4"/>
+                        </svg>
+                    </div>
+                    <div class="payment-border">
+                        <span class="payment-text">Pix</span>
+                    </div>
+                </div>
+
+                <!-- Cartão de crédito -->
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.5" width="55" height="39" rx="5.5" fill="white" stroke="#CFC4C5"/>
+                            <rect x="8" y="14" width="40" height="14" rx="1" fill="#1A1C1C" opacity="0.2"/>
+                            <circle cx="20" cy="21" r="4" fill="#1A1C1C" opacity="0.6"/>
+                            <circle cx="36" cy="21" r="4" fill="#1A1C1C" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <div class="payment-border">
+                        <span class="payment-text">Cartão de crédito</span>
+                    </div>
+                </div>
+
+                <!-- Cartão de débito -->
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.5" width="55" height="39" rx="5.5" fill="white" stroke="#CFC4C5"/>
+                            <rect x="8" y="14" width="40" height="14" rx="1" fill="#1A1C1C" opacity="0.2"/>
+                            <rect x="14" y="18" width="28" height="6" rx="0.5" fill="#1A1C1C" opacity="0.8"/>
+                            <circle cx="36" cy="21" r="3" fill="#1A1C1C"/>
+                        </svg>
+                    </div>
+                    <div class="payment-border">
+                        <span class="payment-text">Cartão de débito</span>
+                    </div>
+                </div>
+
+                <!-- Boleto -->
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.5" width="55" height="39" rx="5.5" fill="white" stroke="#CFC4C5"/>
+                            <path d="M16 14L40 14V26H16V14Z" fill="#1A1C1C" opacity="0.15"/>
+                            <path d="M18 18L38 18V22H18V18Z" fill="#1A1C1C" opacity="0.8"/>
+                            <path d="M18 26L30 26" stroke="#1A1C1C" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M18 30L38 30" stroke="#1A1C1C" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="payment-border">
+                        <span class="payment-text">Boleto</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section - Endereço -->
+        <section class="section-address">
+            <h2 class="address-heading">Endereço</h2>
+            <h3 class="section-subtitle">Endereços cadastrados:</h3>
+
+            <div class="address-background">
+                <div class="address-content">
+                    <p class="address-line">Rua Oscar Freire, 1000</p>
+                    <p class="address-line secondary">Jardins, São Paulo - SP</p>
+                    <p class="address-line secondary">CEP: 01426-001</p>
+                    <button class="address-edit">
+                        <span>Editar</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 14L4.5 12.5M12 4L14 2L12 4ZM11 3L13 5L5 13L3 11L11 3Z" stroke="#1A1C1C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <button class="register-address-btn">+ Cadastrar novo endereço</button>
+        </section>
+
+        <!-- Section - Summary -->
+        <section class="section-summary">
+            <div class="summary-row">
+                <span class="summary-label">Subtotal</span>
+                <span class="summary-value">R$ 890,00</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Frete</span>
+                <span class="summary-value">Grátis</span>
+            </div>
+            <div class="summary-row total-row">
+                <span class="summary-label total-label">Total</span>
+                <span class="summary-value total-value">R$ 890,00</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Fixed Bottom Action -->
+    <div class="fixed-bottom-action">
+        <button class="finalize-button">Finalizar pedido</button>
+    </div>
+
+</div>
+</body>
+</html>

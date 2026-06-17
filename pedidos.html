@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZARA · Meus Pedidos</title>
+  <!-- Fonte Hanken Grotesk + Libre Caslon Text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script src="script.js"></script>
+  <div class="stage">
+    <div class="orders-frame">
+
+      <!-- HEADER -->
+      <div class="orders-header">
+        <button class="header-icon" aria-label="Voltar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <span class="orders-logo">ZARA</span>
+        <button class="header-icon" aria-label="Carrinho">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- MAIN -->
+      <div class="orders-main">
+
+        <h1 class="orders-title">Meus Pedidos</h1>
+
+        <div class="orders-list">
+
+          <!-- Pedido #1 - ENTREGUE -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-number">PEDIDO #882910</span>
+              <span class="order-date">12 de Outubro, 2023</span>
+            </div>
+            <div class="order-products">
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury fashion item.png" alt="Produto 1">
+              </div>
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury accessory.png" alt="Produto 2">
+              </div>
+              <div class="order-product-thumb more">+2</div>
+            </div>
+            <div class="order-details">
+              <div class="order-status-group">
+                <span class="order-status delivered">ENTREGUE</span>
+                <span class="order-price">R$ 2.450,00</span>
+              </div>
+              <a href="#" class="order-details-link">VER DETALHES</a>
+            </div>
+          </div>
+
+          <!-- Pedido #2 - EM TRÂNSITO -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-number">PEDIDO #881452</span>
+              <span class="order-date">05 de Outubro, 2023</span>
+            </div>
+            <div class="order-products">
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury apparel.png" alt="Produto 1">
+              </div>
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury fashion item.png" alt="Produto 2">
+              </div>
+            </div>
+            <div class="order-details">
+              <div class="order-status-group">
+                <span class="order-status transit">EM TRÂNSITO</span>
+                <span class="order-price">R$ 1.890,00</span>
+              </div>
+              <a href="#" class="order-details-link">VER DETALHES</a>
+            </div>
+          </div>
+
+          <!-- Pedido #3 - PROCESSANDO -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-number">PEDIDO #880029</span>
+              <span class="order-date">28 de Setembro, 2023</span>
+            </div>
+            <div class="order-products">
+              <div class="order-product-thumb">
+                <img src="assets/figma/Luxury accessory.png" alt="Produto 1">
+              </div>
+              <div class="order-product-thumb more">+1</div>
+            </div>
+            <div class="order-details">
+              <div class="order-status-group">
+                <span class="order-status processing">PROCESSANDO</span>
+                <span class="order-price">R$ 950,00</span>
+              </div>
+              <a href="#" class="order-details-link">VER DETALHES</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="orders-footer">
+        <p class="footer-brand">MODA MINIMALISTA</p>
+        <div class="footer-nav">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Shipping</a>
+          <a href="#">Contact</a>
+        </div>
+        <p class="footer-copy">© 2024 MODA MINIMALISTA</p>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <div class="bottom-nav">
+        <button class="nav-icon" aria-label="Início">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Busca">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+          </svg>
+        </button>
+        <button class="nav-icon" aria-label="Perfil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
