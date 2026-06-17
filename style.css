@@ -1,599 +1,1653 @@
-// ============================================
-// NAVEGAÇÃO ENTRE TELAS
-// ============================================
-
-// Mapeamento de páginas
-const PAGES = {
-    home: 'index.html',
-    product: 'product.html',
-    cart: 'cart.html',
-    payment: 'payment.html',
-    confirmation: 'confirmation.html',
-    orders: 'pedidos.html',
-    login: 'login.html',
-    menu: 'menu.html',
-    search: 'busca.html'
-};
-
-// Função para navegar entre páginas
-function navigateTo(page) {
-    if (page === 'back') {
-        window.history.back();
-        return;
-    }
-    if (page.startsWith('http')) {
-        window.location.href = page;
-        return;
-    }
-    const pageMap = {
-        'home': PAGES.home,
-        'product': PAGES.product,
-        'cart': PAGES.cart,
-        'payment': PAGES.payment,
-        'confirmation': PAGES.confirmation,
-        'orders': PAGES.orders,
-        'login': PAGES.login,
-        'menu': PAGES.menu,
-        'search': PAGES.search
-    };
-    const target = pageMap[page] || page;
-    window.location.href = target;
+/* Reset and base styles */
+html, body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-// ============================================
-// BOTTOM NAVIGATION
-// ============================================
+body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #FFFFFF;
+  min-height: 100vh;
+  padding: 20px 0;
+}
 
-function setupBottomNav() {
-    const navIcons = document.querySelectorAll('.bottom-nav .nav-icon, .bottom-nav-icon');
-    const navMap = {
-        0: 'home',
-        1: 'search',
-        2: 'cart',
-        3: 'login'
-    };
+.stage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Root frame */
+.frame[data-name="Tela Inicial - iPhone 17"] {
+  width: 402px;
+  background: #F9F9F9;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* General frame and text styles */
+.frame {
+  box-sizing: border-box;
+}
+
+.frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.text {
+  color: #000;
+  margin: 0;
+  font-family: inherit;
+}
+
+/* Header - TopAppBar */
+.frame[data-name="Header - TopAppBar from JSON"] {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #F9F9F9;
+  border-bottom: 1px solid #CFC4C5;
+}
+
+.frame[data-name="Header - TopAppBar from JSON"] > .frame[data-name="Container"] {
+  width: auto;
+  height: auto;
+}
+
+.frame[data-name="Header - TopAppBar from JSON"] .frame[data-name="Heading 1"] {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.text[data-name="ZARA"] {
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2em;
+  letter-spacing: -5%;
+  color: #000000;
+}
+
+/* Main layout */
+.frame[data-name="Main"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  padding: 0px 0px 176px;
+  width: 100%;
+}
+
+/* Hero Section */
+.frame[data-name="Hero Section"] {
+  width: 100%;
+  height: 618px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+}
+
+.frame[data-name="Hero Section"] > .frame[data-name^="AB6AXuA3o"] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.frame[data-name="Hero Section"] > .frame[data-name^="AB6AXuA3o"] img,
+.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] .frame[data-name="Background"] > .frame img,
+.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] > .frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.frame[data-name="Hero Section"] > .frame[data-name="Container"] {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 362px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.text[data-name="Essencial"] {
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1em;
+  letter-spacing: -2%;
+  color: #FFFFFF;
+}
+
+.text[data-name="Coleção de Outono '24"] {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2em;
+  letter-spacing: 10%;
+  color: #FFFFFF;
+  opacity: 0.9;
+}
+
+/* Featured Product Section */
+.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0px 20px;
+  width: 100%;
+}
+
+.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] > .frame[data-name="Container"] {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] .frame[data-name="Background"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  background: #EEEEEE;
+  position: relative;
+  overflow: hidden;
+}
+
+.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] .frame[data-name="Background"] > .frame {
+  width: 100%;
+  height: 525px;
+  background: #EEEEEE;
+  overflow: hidden;
+}
+
+.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] .frame[data-name^="Container"] + .frame[data-name="Container"] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.text[data-name="EXEMPLO DE PRODUTO"] {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6em;
+  letter-spacing: -2.5%;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.text[data-name="R$ 499,00"] {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.2em;
+  color: #5D5F5F;
+}
+
+.rectangle[data-name="Horizontal Divider (Inspired by wireframe line)"] {
+  width: 96px;
+  height: 1.5px;
+  background: #000000;
+  margin: 12px 0;
+}
+
+/* Asymmetric Grid Section */
+.frame[data-name="Asymmetric Grid Section"] {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  gap: 0;
+}
+
+.frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:first-of-type {
+  width: 350px;
+  padding: 0px 0px 16px;
+}
+
+.frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:first-of-type .frame[data-name="Heading 2"] {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px 0.6px;
+}
+
+.text[data-name="Novidades"] {
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2em;
+  letter-spacing: -2%;
+  color: #000000;
+}
+
+/* Grid product containers */
+.frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:nth-of-type(2),
+.frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:nth-of-type(3) {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 50%;
+}
+
+.frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:nth-of-type(2) {
+  float: left;
+  width: calc(50% - 8px);
+  margin-right: 8px;
+}
+
+.frame[data-name="Asymmetric Grid Section"] > .frame[data-name="Container"]:nth-of-type(3) {
+  float: right;
+  width: calc(50% - 8px);
+  margin-left: 8px;
+}
+
+.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  background: #EEEEEE;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] > .frame {
+  width: 100%;
+  height: 253.5px;
+  background: #EEEEEE;
+  overflow: hidden;
+}
+
+.text[data-name="VESTIDO LINHO"],
+.text[data-name="BOTA COURO"] {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2em;
+  letter-spacing: 10%;
+  color: #000000;
+}
+
+.text[data-name="R$ 299,00"],
+.text[data-name="R$ 759,00"] {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #5D5F5F;
+}
+
+/* CTA Button */
+.frame[data-name="CTA Section → Button"] {
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15.5px 0px 15.89px;
+  background: #000000;
+}
+
+.frame[data-name="CTA Section → Button"] .text {
+  color: #FFFFFF;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2em;
+  letter-spacing: 10%;
+  text-align: center;
+}
+
+/* Footer */
+.frame[data-name="Footer Component"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 20px;
+  width: 100%;
+  background: #F3F3F3;
+  border-top: 1px solid #CFC4C5;
+  gap: 0;
+}
+
+.frame[data-name="Footer Component"] .text {
+  color: #1A1C1C;
+}
+
+.text[data-name="MODA MINIMALISTA"] {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.2em;
+  letter-spacing: 10%;
+  color: #1A1C1C;
+}
+
+.frame[data-name="Nav:margin"] {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0px 0px;
+  gap: 0;
+}
+
+.frame[data-name="Nav"] {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+}
+
+.frame[data-name="Nav"] .frame[data-name="Link"] {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.frame[data-name="Nav"] .frame[data-name="Link:margin"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  padding: 0px 0px 0px 16px;
+}
+
+.frame[data-name="Nav"] .frame[data-name="Link:margin"] .frame[data-name="Link"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.frame[data-name="Nav"] .text {
+  color: #5D5F5F;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.frame[data-name="Margin"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.text[data-name="© 2024 MODA MINIMALISTA"] {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5em;
+  opacity: 0.6;
+  color: #1A1C1C;
+}
+
+/* Bottom Navigation Bar */
+.frame[data-name="BottomNavBar Component"] {
+  width: 100%;
+  height: 64px;
+  background: #F9F9F9;
+  border-top: 1px solid #CFC4C5;
+}
+
+/* Header Icons */
+.header-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
+.header-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Hero Placeholder */
+.hero-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 12px;
+}
+
+/* Product Placeholder */
+.product-placeholder {
+  width: 100%;
+  height: 253.5px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Featured Heart Button */
+.featured-heart {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-heart svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Bottom Navigation Bar */
+.frame[data-name="BottomNavBar Component"] {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+  background: #F9F9F9;
+  border-top: 1px solid #CFC4C5;
+  padding: 0;
+}
+
+.bottom-nav-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.bottom-nav-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Product page styles */
+.product-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.product-frame {
+  width: 402px;
+  background: #F9F9F9;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.product-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #F9F9F9;
+  border-bottom: 1px solid #CFC4C5;
+  position: relative;
+  z-index: 2;
+}
+
+.product-logo {
+  font-family: 'Libre Caslon Text', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #000;
+}
+
+.product-main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0 0 128px;
+  width: 100%;
+}
+
+.product-hero {
+  position: relative;
+  width: 100%;
+}
+
+.product-hero-image {
+  position: relative;
+  width: 100%;
+  height: 585px;
+  overflow: hidden;
+}
+
+.product-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-indicators {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  gap: 6px;
+}
+
+.hero-indicators span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.hero-indicators span.active {
+  background: #000;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 20px;
+}
+
+.product-details-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.product-details-heading h1 {
+  margin: 0;
+  font-family: 'Libre Caslon Text', serif;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+  color: #1A1C1C;
+}
+
+.product-price {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.2;
+  color: #1A1C1C;
+}
+
+.product-description {
+  margin: 0;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.625;
+  color: #5D5F5F;
+}
+
+.product-attributes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.attribute-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attribute-label {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: #1A1C1C;
+}
+
+.attribute-swatch {
+  width: 40px;
+  height: 40px;
+  background: #1A1C1C;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+
+.attribute-sizes {
+  display: flex;
+  gap: 12px;
+}
+
+.size-option {
+  min-width: 40px;
+  padding: 12px 0;
+  border: 1px solid #CFC4C5;
+  background: #FFFFFF;
+  color: #1A1C1C;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.size-option.selected {
+  background: #000;
+  color: #FFFFFF;
+  border-color: #000;
+}
+
+.product-button {
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  background: #000;
+  color: #FFFFFF;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.product-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-top: 1px solid #CFC4C5;
+}
+
+.accordion-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 20px;
+  background: #FFFFFF;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: #1A1C1C;
+}
+
+.accordion-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-bottom-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid #CFC4C5;
+  background: #F9F9F9;
+}
+
+.product-bottom-bar .bottom-nav-icon {
+  width: 44px;
+  height: 44px;
+}
+
+/* Cart page styles */
+.cart-stage {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.cart-frame {
+  width: 402px;
+  background: #F9F9F9;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.cart-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #F9F9F9;
+  border-bottom: 1px solid #CFC4C5;
+}
+
+.cart-logo {
+  font-family: 'Libre Caslon Text', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #000;
+}
+
+.cart-main {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 24px 20px 160px;
+}
+
+.cart-headline h1 {
+  margin: 0;
+  font-family: 'Libre Caslon Text', serif;
+  font-size: 28px;
+  line-height: 1.2;
+  color: #000;
+}
+
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #CFC4C5;
+}
+
+.cart-item-media {
+  width: 120px;
+  min-width: 120px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #F3F3F3;
+}
+
+.cart-item-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cart-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-item-title {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.cart-item-price {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #1A1C1C;
+}
+
+.cart-item-selectors {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart-selector {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #CFC4C5;
+  background: #FFFFFF;
+}
+
+.color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #1A1C1C;
+  border: 1px solid #000;
+}
+
+.size-pill {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid #CFC4C5;
+  background: #FFFFFF;
+}
+
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.cart-quantity button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #CFC4C5;
+  background: #FFFFFF;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cart-quantity span {
+  min-width: 24px;
+  text-align: center;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 14px;
+}
+
+.recommendation-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 48px;
+  border-top: 1px solid #CFC4C5;
+}
+
+.recommendation-section h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.recommendation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.recommendation-card {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 16px;
+  background: #F3F3F3;
+  border-radius: 16px;
+}
+
+.recommendation-background {
+  width: 96px;
+  height: 96px;
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.recommendation-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.recommendation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.recommendation-name {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000;
+}
+
+.recommendation-price {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #5D5F5F;
+}
+
+.cart-sticky-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 20px;
+  border-top: 1px solid #CFC4C5;
+  background: #F9F9F9;
+}
+
+.cart-action {
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.cart-action.primary {
+  background: #000;
+  color: #FFF;
+}
+
+.cart-action.secondary {
+  background: transparent;
+  color: #000;
+  border: 1px solid #CFC4C5;
+}
+
+/* ============================================
+   PAYMENT PAGE STYLES (payment.html)
+   ============================================ */
+
+/* Payment Wrapper - Centered 402px container */
+.payment-wrapper {
+  width: 100%;
+  max-width: 402px;
+  background: #F9F9F9;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Header */
+.payment-wrapper .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 64px;
+  background: #F9F9F9;
+  border-bottom: 1px solid #CFC4C5;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.payment-wrapper .header-icon {
+  width: 17px;
+  height: 17px;
+  background: transparent;
+}
+
+.payment-wrapper .header-title {
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -5%;
+  color: #000000;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+/* Main Content */
+.payment-wrapper .main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 47px;
+  padding: 95px 20px 160px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #F9F9F9;
+}
+
+/* Page Title */
+.payment-wrapper .section-title {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.payment-wrapper .page-heading {
+  margin: 0;
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -2%;
+  color: #1A1C1C;
+}
+
+/* Payment Methods Section */
+.payment-wrapper .section-payment-methods {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.payment-wrapper .section-subtitle {
+  margin: 0;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 10%;
+  color: #4C4546;
+}
+
+.payment-wrapper .payment-options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.payment-wrapper .payment-option {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #1A1C1C;
+}
+
+.payment-wrapper .payment-icon {
+  width: 56px;
+  height: 40px;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.payment-wrapper .payment-border {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #1A1C1C;
+}
+
+.payment-wrapper .payment-text {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1A1C1C;
+}
+
+/* Address Section */
+.payment-wrapper .section-address {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15.5px;
+}
+
+.payment-wrapper .address-heading {
+  margin: 0;
+  font-family: 'Libre Caslon Text', serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -2%;
+  color: #1A1C1C;
+}
+
+.payment-wrapper .address-background {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 32px 24px 24px 24px;
+  background: #F3F3F3;
+  border-radius: 8px;
+  position: relative;
+}
+
+.payment-wrapper .address-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-wrapper .address-line {
+  margin: 0;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1A1C1C;
+}
+
+.payment-wrapper .address-line.secondary {
+  font-weight: 400;
+  color: #5D5F5F;
+}
+
+.payment-wrapper .address-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000000;
+  padding: 0;
+}
+
+.payment-wrapper .address-edit span {
+  text-decoration: underline;
+}
+
+.payment-wrapper .register-address-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #1A1C1C;
+  cursor: pointer;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1A1C1C;
+  height: 40px;
+}
+
+/* Summary Section */
+.payment-wrapper .section-summary {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 33px;
+  border-top: 1px solid #CFC4C5;
+}
+
+.payment-wrapper .summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.payment-wrapper .summary-label {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #5D5F5F;
+}
+
+.payment-wrapper .summary-value {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1A1C1C;
+}
+
+.payment-wrapper .total-row {
+  padding-top: 16px;
+}
+
+.payment-wrapper .total-label {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #1A1C1C;
+}
+
+.payment-wrapper .total-value {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #1A1C1C;
+}
+
+/* Fixed Bottom Action */
+.payment-wrapper .fixed-bottom-action {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 402px;
+  padding: 24px 20px;
+  background: #F9F9F9;
+  border-top: 1px solid #CFC4C5;
+  box-sizing: border-box;
+  z-index: 99;
+}
+
+.payment-wrapper .finalize-button {
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  background: #000000;
+  color: #FFFFFF;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0;
+  box-shadow: 0px 8px 10px -6px rgba(0, 0, 0, 0.1), 0px 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.payment-wrapper .finalize-button:hover {
+  background: #1A1C1C;
+}
+
+.payment-wrapper .finalize-button:active {
+  background: #000000;
+  box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+    /* ===== Página de confirmação ===== */
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: #FFFFFF;
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+    .stage {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+    }
+    .frame {
+      box-sizing: border-box;
+    }
+    .frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .text {
+      color: #000;
+      margin: 0;
+      font-family: inherit;
+    }
+    /* ===== Estilos específicos da tela de confirmação (finalização) ===== */
+    .finalize-frame {
+      width: 402px;
+      background: #F9F9F9;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+    /* Header com logo ZARA (igual ao das outras telas) */
+    .finalize-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: #F9F9F9;
+      border-bottom: 1px solid #CFC4C5;
+      position: relative;
+      z-index: 2;
+    }
+    .finalize-header .header-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .finalize-header .header-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    .finalize-logo {
+      font-family: 'Libre Caslon Text', serif;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: -5%;
+      color: #000000;
+      margin: 0;
+      flex: 1;
+      text-align: center;
+    }
+    /* Main content */
+    .finalize-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+      padding: 48px 20px 160px 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    /* Confirmation card */
+    .confirmation-card {
+      width: 100%;
+      background: #F3F3F3;
+      border-radius: 16px;
+      padding: 32px 24px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      box-sizing: border-box;
+    }
+    .confirmation-card .thank-you {
+      font-family: 'Libre Caslon Text', serif;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -2%;
+      color: #1A1C1C;
+      margin: 0;
+    }
+    .confirmation-card .order-status {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 10%;
+      text-transform: uppercase;
+      color: #000000;
+      margin: 0;
+      margin-top: 4px;
+    }
+    .confirmation-card .divider {
+      width: 96px;
+      height: 1.5px;
+      background: #000000;
+      margin: 12px 0 8px 0;
+    }
+    .confirmation-card .order-number {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #5D5F5F;
+      margin: 0;
+    }
+    .confirmation-card .cta-link {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 10%;
+      text-transform: uppercase;
+      color: #000000;
+      text-decoration: none;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 2px;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+    .confirmation-card .cta-link:hover {
+      opacity: 0.7;
+    }
+    /* You may also like */
+    .also-like {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .also-like .section-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 10%;
+      text-transform: uppercase;
+      color: #1A1C1C;
+      margin: 0;
+    }
+    .also-like .product-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .also-like .product-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 16px 12px 12px;
+      background: #F3F3F3;
+      border-radius: 16px;
+    }
+    .also-like .product-item .product-thumb {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #E0E0E0;
+    }
+    .also-like .product-item .product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .also-like .product-item .product-info {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .also-like .product-item .product-name {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #1A1C1C;
+      margin: 0;
+    }
+    .also-like .product-item .product-price {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: #5D5F5F;
+      margin: 0;
+    }
+    /* Rodapé (footer) igual ao da home */
+    .finalize-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px 20px;
+      width: 100%;
+      background: #F3F3F3;
+      border-top: 1px solid #CFC4C5;
+      box-sizing: border-box;
+    }
+    .finalize-footer .footer-brand {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 1.2;
+      letter-spacing: 10%;
+      color: #1A1C1C;
+      margin: 0;
+    }
+    .finalize-footer .footer-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0 0 0;
+    }
+    .finalize-footer .footer-nav a {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #5D5F5F;
+      text-decoration: none;
+    }
+    .finalize-footer .footer-nav a:hover {
+      text-decoration: underline;
+    }
+    .finalize-footer .footer-copy {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.6;
+      color: #1A1C1C;
+      margin: 16px 0 0 0;
+    }
+    /* Bottom navigation (igual ao style.css) */
+    .bottom-nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      height: 64px;
+      background: #F9F9F9;
+      border-top: 1px solid #CFC4C5;
+      box-sizing: border-box;
+    }
+    .bottom-nav .nav-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+    }
+    .bottom-nav .nav-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    /* Ajuste para telas pequenas */
+    @media (max-width: 420px) {
+      .finalize-frame {
+        width: 100%;
+        max-width: 402px;
+      }
+    }
     
-    navIcons.forEach((icon, index) => {
-        icon.addEventListener('click', function(e) {
-            e.preventDefault();
-            const page = navMap[index];
-            if (page) {
-                navigateTo(page);
-            }
-        });
-    });
+/* ============================================
+   ACCORDION CONTENT (para product.html)
+   ============================================ */
+.accordion-content {
+    display: none;
+    padding: 0 20px 20px 20px;
+    background: #FFFFFF;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #5D5F5F;
+    border-bottom: 1px solid #CFC4C5;
 }
 
-// ============================================
-// HEADER ICONS
-// ============================================
-
-function setupHeaderIcons() {
-    // Botão voltar
-    const backBtns = document.querySelectorAll('.header-icon[aria-label="Voltar"]');
-    backBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('back');
-        });
-    });
-
-    // Botão menu (hambúrguer) - FINALIZE-HEADER
-    const menuBtns = document.querySelectorAll('.header-icon[aria-label="Menu"], .finalize-header .header-icon:first-child');
-    menuBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('menu');
-        });
-    });
-
-    // Botão carrinho - em todas as páginas (seletores específicos)
-    const cartBtns = document.querySelectorAll(
-        '.header-icon[aria-label="Carrinho"], ' +
-        '.finalize-header .header-icon:last-child, ' +
-        '.orders-header .header-icon:last-child, ' +
-        '.login-header .header-icon:last-child, ' +
-        '.menu-header .header-icon:last-child, ' +
-        '.search-header .header-icon:last-child'
-    );
-    cartBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('cart');
-        });
-    });
+.accordion-content.open {
+    display: block;
 }
 
-// ============================================
-// FOOTER LINKS
-// ============================================
-
-function setupFooterLinks() {
-    const footerLinks = document.querySelectorAll('.footer-nav a, .finalize-footer .footer-nav a, .orders-footer .footer-nav a, .menu-footer .footer-nav a, .search-footer .footer-nav a, .login-footer .footer-nav a');
-    footerLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const text = this.textContent.trim().toLowerCase();
-            alert(`Navegando para: ${text}`);
-        });
-    });
+/* ============================================
+   PAYMENT - Seleção de método
+   ============================================ */
+.payment-option {
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }
 
-// ============================================
-// HOME PAGE - Produtos levam para product.html
-// ============================================
-
-function setupHomeProducts() {
-    // Produto em destaque (Featured Product) - clica na imagem
-    const featuredImage = document.querySelector('.frame[data-name="Featured Product Section (As per wireframe IMAGE_5)"] .frame[data-name="Background"] > .frame');
-    if (featuredImage) {
-        featuredImage.style.cursor = 'pointer';
-        featuredImage.addEventListener('click', function(e) {
-            if (e.target.closest('.featured-heart')) return;
-            navigateTo('product');
-        });
-    }
-
-    // Produtos da grade assimétrica - clica nas imagens
-    const gridImages = document.querySelectorAll('.frame[data-name="Asymmetric Grid Section"] .frame[data-name="Background"] > .frame');
-    gridImages.forEach(img => {
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', function() {
-            navigateTo('product');
-        });
-    });
-
-    // Botão "VER TODA A COLEÇÃO"
-    const ctaBtn = document.querySelector('.frame[data-name="CTA Section → Button"]');
-    if (ctaBtn) {
-        ctaBtn.style.cursor = 'pointer';
-        ctaBtn.addEventListener('click', function() {
-            navigateTo('search');
-        });
-    }
+.payment-option:hover {
+    opacity: 0.7;
 }
 
-// ============================================
-// MENU PAGE - Links funcionais
-// ============================================
-
-function setupMenuLinks() {
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const label = this.querySelector('.item-label');
-            if (label) {
-                const text = label.textContent.trim();
-                // Mapeia os itens do menu
-                const menuMap = {
-                    'NEW ARRIVALS': 'home',
-                    'COLLECTIONS': 'home',
-                    'MEN': 'home',
-                    'WOMEN': 'home',
-                    'ACCOUNT': 'login'
-                };
-                const target = menuMap[text] || 'home';
-                navigateTo(target);
-            }
-        });
-    });
+.payment-option.selected {
+    opacity: 1 !important;
 }
 
-// ============================================
-// CART PAGE - Produtos levam para product.html
-// ============================================
-
-function setupCartItems() {
-    // Imagens dos itens do carrinho
-    const cartImages = document.querySelectorAll('.cart-item-media');
-    cartImages.forEach(img => {
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', function(e) {
-            navigateTo('product');
-        });
-    });
-
-    // Nomes dos produtos no carrinho
-    const cartTitles = document.querySelectorAll('.cart-item-title');
-    cartTitles.forEach(title => {
-        title.style.cursor = 'pointer';
-        title.addEventListener('click', function() {
-            navigateTo('product');
-        });
-    });
-
-    // Recomendações no carrinho
-    const recommendations = document.querySelectorAll('.recommendation-card');
-    recommendations.forEach(rec => {
-        rec.style.cursor = 'pointer';
-        rec.addEventListener('click', function() {
-            navigateTo('product');
-        });
-    });
+/* ============================================
+   ORDERS - Hover nos cards
+   ============================================ */
+.order-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-// ============================================
-// CONFIRMATION PAGE - Produtos recomendados
-// ============================================
-
-function setupConfirmationProducts() {
-    // Cada produto recomendado na página de confirmação
-    const products = document.querySelectorAll('.product-item');
-    products.forEach(item => {
-        item.style.cursor = 'pointer';
-        item.addEventListener('click', function() {
-            navigateTo('product');
-        });
-    });
-
-    // Também as thumbs dos produtos
-    const thumbs = document.querySelectorAll('.product-thumb');
-    thumbs.forEach(thumb => {
-        thumb.style.cursor = 'pointer';
-        thumb.addEventListener('click', function(e) {
-            e.stopPropagation();
-            navigateTo('product');
-        });
-    });
+.order-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
-
-// ============================================
-// PRODUCT PAGE - Seleção de tamanho
-// ============================================
-
-function setupProductSizes() {
-    const sizeOptions = document.querySelectorAll('.size-option');
-    sizeOptions.forEach(option => {
-        option.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const parent = this.closest('.attribute-sizes');
-            if (parent) {
-                parent.querySelectorAll('.size-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                this.classList.add('selected');
-            }
-        });
-    });
-}
-
-// ============================================
-// PRODUCT PAGE - Botão "Adicionar ao Carrinho"
-// ============================================
-
-function setupProductButton() {
-    const addBtn = document.querySelector('.product-button');
-    if (addBtn) {
-        addBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const selectedSize = document.querySelector('.size-option.selected');
-            const sizeText = selectedSize ? selectedSize.textContent : 'P';
-            alert(`Produto adicionado ao carrinho!\nTamanho: ${sizeText}`);
-            if (confirm('Deseja ir para o carrinho agora?')) {
-                navigateTo('cart');
-            }
-        });
-    }
-}
-
-// ============================================
-// PRODUCT PAGE - Accordion
-// ============================================
-
-function setupAccordion() {
-    const accordionRows = document.querySelectorAll('.accordion-row');
-    accordionRows.forEach(row => {
-        row.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const icon = this.querySelector('.accordion-icon');
-            let content = this.nextElementSibling;
-            
-            if (!content || !content.classList.contains('accordion-content')) {
-                const label = this.querySelector('span:first-child');
-                if (label) {
-                    alert(`Expandindo: ${label.textContent}`);
-                }
-                return;
-            }
-            
-            const isOpen = content.style.display !== 'none';
-            content.style.display = isOpen ? 'none' : 'block';
-            if (icon) {
-                icon.textContent = isOpen ? '+' : '−';
-            }
-        });
-    });
-}
-
-// ============================================
-// CART PAGE - Quantidade
-// ============================================
-
-function setupCartQuantity() {
-    const quantityGroups = document.querySelectorAll('.cart-quantity');
-    quantityGroups.forEach(group => {
-        const minusBtn = group.querySelector('button:first-child');
-        const plusBtn = group.querySelector('button:last-child');
-        const span = group.querySelector('span');
-        
-        if (minusBtn) {
-            minusBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (span) {
-                    let val = parseInt(span.textContent) || 1;
-                    if (val > 1) {
-                        val--;
-                        span.textContent = val;
-                    }
-                }
-            });
-        }
-        if (plusBtn) {
-            plusBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (span) {
-                    let val = parseInt(span.textContent) || 1;
-                    val++;
-                    span.textContent = val;
-                }
-            });
-        }
-    });
-}
-
-// ============================================
-// CART PAGE - Botões de ação
-// ============================================
-
-function setupCartActions() {
-    const primaryBtn = document.querySelector('.cart-action.primary');
-    const secondaryBtn = document.querySelector('.cart-action.secondary');
-    
-    if (primaryBtn) {
-        primaryBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('payment');
-        });
-    }
-    if (secondaryBtn) {
-        secondaryBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('home');
-        });
-    }
-}
-
-// ============================================
-// PAYMENT PAGE - Botão "X" (fechar)
-// ============================================
-
-function setupPaymentClose() {
-    // O "X" no header do payment é o ícone à esquerda
-    const closeBtn = document.querySelector('.payment-wrapper .header .header-icon:first-child');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('home');
-        });
-    }
-}
-
-// ============================================
-// PAYMENT PAGE - "Finalizar pedido"
-// ============================================
-
-function setupPaymentButton() {
-    const finalizeBtn = document.querySelector('.finalize-button');
-    if (finalizeBtn) {
-        finalizeBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (confirm('Confirmar pagamento?')) {
-                navigateTo('confirmation');
-            }
-        });
-    }
-}
-
-// ============================================
-// PAYMENT PAGE - Métodos de pagamento (seleção)
-// ============================================
-
-function setupPaymentOptions() {
-    const options = document.querySelectorAll('.payment-option');
-    options.forEach(option => {
-        option.style.cursor = 'pointer';
-        option.addEventListener('click', function() {
-            document.querySelectorAll('.payment-option').forEach(opt => {
-                opt.style.opacity = '0.5';
-            });
-            this.style.opacity = '1';
-            const text = this.querySelector('.payment-text');
-            if (text) {
-                alert(`Método de pagamento selecionado: ${text.textContent}`);
-            }
-        });
-    });
-}
-
-// ============================================
-// PAYMENT PAGE - Endereço (editar/cadastrar)
-// ============================================
-
-function setupAddressActions() {
-    const editBtn = document.querySelector('.address-edit');
-    const registerBtn = document.querySelector('.register-address-btn');
-    
-    if (editBtn) {
-        editBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Editar endereço: Rua Oscar Freire, 1000');
-        });
-    }
-    if (registerBtn) {
-        registerBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Cadastrar novo endereço');
-        });
-    }
-}
-
-// ============================================
-// CONFIRMATION PAGE - "Ver meus pedidos"
-// ============================================
-
-function setupConfirmationLinks() {
-    const orderLink = document.querySelector('.cta-link');
-    if (orderLink) {
-        orderLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('orders');
-        });
-    }
-}
-
-// ============================================
-// LOGIN PAGE - Formulário
-// ============================================
-
-function setupLoginForm() {
-    const form = document.querySelector('.login-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email');
-            const password = document.getElementById('password');
-            
-            if (email && password) {
-                if (email.value.trim() && password.value.trim()) {
-                    alert('Login realizado com sucesso!');
-                    navigateTo('home');
-                } else {
-                    alert('Por favor, preencha todos os campos.');
-                }
-            }
-        });
-    }
-}
-
-// ============================================
-// LOGIN PAGE - Botões sociais
-// ============================================
-
-function setupSocialButtons() {
-    const socialBtns = document.querySelectorAll('.social-btn');
-    socialBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const text = this.textContent.trim();
-            alert(`Continuar com ${text}`);
-            navigateTo('home');
-        });
-    });
-}
-
-// ============================================
-// SEARCH PAGE - Correção de termo
-// ============================================
-
-function setupSearchCorrection() {
-    const correction = document.querySelector('.correction');
-    if (correction) {
-        correction.addEventListener('click', function(e) {
-            e.preventDefault();
-            const input = document.querySelector('.search-input-wrapper input');
-            if (input) {
-                input.value = 'Calça';
-                alert('Termo corrigido para: Calça');
-            }
-        });
-    }
-}
-
-// ============================================
-// SEARCH PAGE - Sugestões de produtos
-// ============================================
-
-function setupSearchSuggestions() {
-    const suggestions = document.querySelectorAll('.search-suggestion-item');
-    suggestions.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('product');
-        });
-    });
-}
-
-// ============================================
-// ORDERS PAGE - "VER DETALHES"
-// ============================================
-
-function setupOrderDetails() {
-    const detailLinks = document.querySelectorAll('.order-details-link');
-    detailLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const card = this.closest('.order-card');
-            const orderNumber = card ? card.querySelector('.order-number') : null;
-            if (orderNumber) {
-                alert(`Visualizando detalhes do ${orderNumber.textContent}`);
-            }
-        });
-    });
-}
-
-// ============================================
-// ORDERS PAGE - Clique no card do pedido
-// ============================================
-
-function setupOrderCards() {
-    const cards = document.querySelectorAll('.order-card');
-    cards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (e.target.closest('.order-details-link')) return;
-            const orderNumber = this.querySelector('.order-number');
-            if (orderNumber) {
-                alert(`Visualizando detalhes do ${orderNumber.textContent}`);
-            }
-        });
-    });
-}
-
-// ============================================
-// INICIALIZAÇÃO GERAL
-// ============================================
-
-function initApp() {
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    const currentPage = currentPath.replace('.html', '');
-    
-    console.log(`📱 Inicializando: ${currentPage}`);
-    
-    setupBottomNav();
-    setupHeaderIcons();
-    setupFooterLinks();
-    setupHomeProducts();
-    setupMenuLinks();
-    setupCartItems();
-    setupCartQuantity();
-    setupCartActions();
-    setupProductSizes();
-    setupProductButton();
-    setupAccordion();
-    setupPaymentClose();
-    setupPaymentButton();
-    setupPaymentOptions();
-    setupAddressActions();
-    setupConfirmationLinks();
-    setupConfirmationProducts();
-    setupLoginForm();
-    setupSocialButtons();
-    setupSearchCorrection();
-    setupSearchSuggestions();
-    setupOrderDetails();
-    setupOrderCards();
-    
-    console.log('✅ App inicializado com sucesso!');
-}
-
-document.addEventListener('DOMContentLoaded', initApp);
